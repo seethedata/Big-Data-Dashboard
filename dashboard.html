@@ -1,0 +1,58 @@
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="includes/dashboard.css">
+	<script src="includes/dashboard.js"></script>
+</head>
+
+<body onLoad='updateHeadline();updateCampaigns()'>
+	<div id='dashboard'>
+		<div id='headline'><span id='headlineText' > </span>
+		</div>
+		<div id='itemDetail' onclick="javascript:getElementById('itemDetail').style.display='none'"> </div>
+		 <div class='small_widget'>
+			<span class='small_widget_header'>Insights</span>
+			<img class='small_widget_image' src='images/insight.png'/>
+			<div class='widget_list'>
+				<p class='recommendation'><a href="javascript:showDetail('item1');">Customer XYZ has increased spending 350%, which has placed them at the top of the "most valued customer" list. <img class='detail' src="images/detail.png"/>Detail</a></p>
+				<p class='recommendation'><a href="javascript:showDetail('item2');">Customer ABC does not seem to be spending as much as they did	, down 48% from the average of the last 4 quarters.<img class='detail' src="images/detail.png"/>Detail</a></p>
+				<p class='recommendation'><a href="javascript:showDetail('item3');">The average increase in spend this quarter for all customers is 25%, which is 3 times higher than the normal increase at this time of year.<img class='detail' src="images/detail.png"/>Detail</a></p>
+			</div>
+		  </div>
+		 <div class='small_widget'>
+			  <span class='small_widget_header'>Recommendations</span>
+			  <img class='small_widget_image' src='images/recommend.png'/> 
+				<div class='widget_list'>
+				<p class='recommendation'><a href="javascript:showDetail('recommendation1');"><span  id='recommendation1'>Target Customer XYZ is predicted to be a strong influencer. Contact Customer XYZ's Facebook circle and offer 10% discounted rates.<img class='detail' src="images/detail.png"/>Detail</a></span></p>
+				<p class='recommendation'><a href="javascript:showDetail('recommendation2');"><span  id='recommendation2'>Target Customer ABC is predicted to be considering leaving. Contact Customer ABC and offer free upgrade to Enchanged Package.<img class='detail' src="images/detail.png"/>Detail</a></span></p>
+				<p class='recommendation'><a href="javascript:showDetail('recommendation3');"><span  id='recommendation3'>Target Customer ABC is predicted to be considering leaving. Contact Customer ABC's Facebook circle and offer free upgrade to Enchanged Package.<img class='detail' src="images/detail.png"/>Detail</a></span></p>
+			
+				</div>
+		 </div>
+		<div class='large_widget'>
+			<span class='large_widget_header'>Return on Marketing Campaigns to Date</span>
+			  <div class='campaign' > 
+					<span id='campaign1'> </span>
+					<br/>
+					<div  class='campaign_bar'>
+						<div  class='current_bar' id='campaign_bar1'> </div> 
+					</div>Goal
+				</div>
+			  <div class='campaign' >
+					<span id='campaign2'> </span>
+					<br/>
+					<div  class='campaign_bar'>
+						<div  class='current_bar' id='campaign_bar2'> </div> 
+					</div>Goal
+				</div>
+			  <div class='campaign'>
+						<span id='campaign3'> </span>
+						<br/>
+						<div  class='campaign_bar'>
+							<div  class='current_bar'  id='campaign_bar3'> </div> 
+						</div>Goal
+				</div>
+		</div>
+	</div>
+</body>
+</html>
+
