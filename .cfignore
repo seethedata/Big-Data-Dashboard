@@ -1,0 +1,5 @@
+.cfignore
+.git
+.gitattributes
+.gitignore
+README.md

@@ -1,6 +1,6 @@
 # Dashboard Manifest
-application:
-	name: BD-Dashboard
-	memory: 512MB
-	host: bd-dashboard
+applications:
+name: dashboard
+memory: 512MB
+host: bd-dashboard
 	
