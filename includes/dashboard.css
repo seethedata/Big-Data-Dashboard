@@ -2,9 +2,9 @@ body { background-color : #FFFFFF;}
 a:link ,a:visited ,a:active ,a:hover { text-decoration : none ; font-size : 1.1em; color : #2C95DD;}
 img {border : none}
 
-div#dashboard {  width : 90% ; height : 85% ; margin-left : auto ; margin-right : auto; margin-top : 3em}
-div#headline { height :5%; font-size : 100% ; margin-bottom : 3em;   }
-span.numberValue { font-size : 1.3em ; position : relative ; top : 5%;}
+div#dashboard {  width : 90% ; height : 85% ; margin-left : auto ; margin-right : auto; margin-top : 3em;}
+div#headline {  font-size : 1em; margin-bottom : 3em;  position: relative; 	}
+div#headline_label  {   position : absolute ; top : 4px; font-weight: bold; text-shadow: 1px 1px 0 #fff; text-align : center; width : 100%; margin-left : auto ; margin-right : auto ; left : 0 ; right : 0; }
 
 img.detail , img.accept { width : 3% ; height : 6%; }
 

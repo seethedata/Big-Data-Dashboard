@@ -10,9 +10,22 @@ window.setInterval(function() {updateHeadline()},1000);
 $(function() {
     $( "#insights").accordion({collapsible: true, active : false, heightStyle : "content"});
 });
+
 $(function() {
 	$( "#recommendations").accordion({collapsible: true, active : false, heightStyle : "content"});
  });
+
+$(function() {
+	$("#headline").progressbar({max : 1, value :1});
+	updateHeadline();
+});	
+
+$(function() {
+	$("button")
+	.button()
+});
+
+
 function getPrintDate() {
 	var currentDate=new Date();
 	var year=currentDate.getFullYear();
@@ -60,12 +73,13 @@ function updateHeadline() {
 	var averageSale=getAvgSaleSize();
 	var activeCustomerCount = getActiveCustomerCount();
 	var unitsProduced = getUnitsProduced();
-	document.getElementById("headlineText").innerHTML="| Key Performance Metrics as of " + "<span class='numberValue'>" + printDate  + "</span>"
-			+ " | Average Sale Size: " + "<span class='numberValue'>" + averageSale.toLocaleString(	'en-US',{style : "currency",  currency : "USD", currencyDisplay : "symbol"})  + "</span>"
-			+ " | Active Website Customers: " + "<span class='numberValue'>" + activeCustomerCount .toLocaleString('en-US')  + "</span>"
-			+ " | Units Produced: " + "<span class='numberValue'>" + unitsProduced .toLocaleString("en-US") + "</span>"
-			+ " | ";
+	var headlineText=" Key Performance Metrics as of " + printDate  	
+									+ " | Average Sale Size: " + averageSale.toLocaleString(	'en-US',{style : "currency",  currency : "USD", currencyDisplay : "symbol"})  
+									+ " | Active Website Customers: " + activeCustomerCount .toLocaleString('en-US')  
+									+ " | Units Produced: " + unitsProduced .toLocaleString("en-US") ;
+	$("#headline_label").text(headlineText);
 }
+
 
 window.setInterval(function() {updateCampaigns()},3000);
 
@@ -73,8 +87,6 @@ function updateCampaigns() {
 	campaign1= campaign1 + 60
 	campaign2= campaign2 +10;
 	campaign3=campaign3 + 1;
-	
-
 
 	$("#campaign_bar1").progressbar({max: campaign1_goal, value: campaign1});
 	$("#campaign_bar1_label").text("\"Go the the Max\" : " + campaign1.toLocaleString('en-US',{style : "currency",  currency : "USD", currencyDisplay : "symbol"}));
@@ -92,6 +104,6 @@ function acceptAction(recommendation) {
 	} else if ( recommendation == "recommendation3" ) {
 		alert('Accepted. Upgrade packages offer sent.');
 	}
-	e=document.getElementById(recommendation);
-	e.style.display='none';
+	/*e=document.getElementById(recommendation);
+	e.style.display='none'; */
 }

@@ -11,8 +11,7 @@
 
 <body onLoad='updateHeadline();updateCampaigns()'>
 	<div id='dashboard'>
-		<div id='headline'><span id='headlineText' > </span>
-		</div>
+		<div  id='headline'><div id="headline_label"></div></div>
 		<div id='itemDetail' onclick="javascript:getElementById('itemDetail').style.display='none'"> </div>
 		 <div class='small_widget'>
 			<span class='small_widget_header'>Insights</span>
@@ -83,7 +82,7 @@
 							<li>10% discount is predicted to have 87% efficacy rate due to Customer XYZ's influence.</li>
 						</ul>
 					</div>
-					<div class="acceptButton"><button name="Accept" onClick="acceptAction(\'recommendation1\')">Accept</button></div>
+					<div class="acceptButton"><button name="Accept" onClick="acceptAction('recommendation1')">Accept</button></div>
 					</div>
 					<h3>Customer ABC is predicted to be considering leaving. Contact Customer ABC and offer free upgrade to Enhanced Package.</h3>
 					<div class="detail">
@@ -99,8 +98,8 @@
 								<li>Enhanced Package Offer rate is predicted to increase customer satisfaction ranking by 35%.</li>
 							</ul>
 						</div>
-						<div class="acceptButton"><button name="Accept" onClick="acceptAction(\'recommendation2\')">Accept</button></div>
-						<div class="rejectButton"><button name="Reject" onClick="rejectAction(\'recommendation2\')">Reject</button></div>
+						<div class="acceptButton"><button name="Accept" onClick="acceptAction('recommendation2')">Accept</button></div>
+						<div class="rejectButton"><button name="Reject" onClick="rejectAction('recommendation2')">Reject</button></div>
 					</div>
 					<h3>Target Customer ABC is predicted to be considering leaving. Contact Customer ABC's Facebook circle and offer free upgrade to Enhanced Package.</h3>
 					<div class="detail">
@@ -116,7 +115,7 @@
 								<li>Enhanced Package Offer rate is predicted to increase customer satisfaction ranking by 35%.</li>
 							</ul>
 						</div>
-						<div class="acceptButton"><button name="Accept" onClick="acceptAction(\'recommendation3\')">Accept</button></div>
+						<div class="acceptButton"><button name="Accept" onClick="acceptAction('recommendation3')">Accept</button></div>
 					</div>
 				</div>
 		 </div>
