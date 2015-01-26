@@ -1,7 +1,12 @@
+<!DOCTYPE html>
 <html>
 <head>
 	<link rel="stylesheet" type="text/css" href="includes/dashboard.css">
+  	<script src="includes/jquery-1.11.2.min.js"></script>
+	<link rel="stylesheet" href="includes/jquery-ui.css">
+  	<script src="includes/jquery-ui.js"></script>
 	<script src="includes/dashboard.js"></script>
+	
 </head>
 
 <body onLoad='updateHeadline();updateCampaigns()'>
@@ -12,45 +17,115 @@
 		 <div class='small_widget'>
 			<span class='small_widget_header'>Insights</span>
 			<img class='small_widget_image' src='images/insight.png'/>
-			<div class='widget_list'>
-				<p class='recommendation'><a href="javascript:showDetail('item1');">Customer XYZ has increased spending 350%, which has placed them at the top of the "most valued customer" list. <img class='detail' src="images/detail.png"/>Detail</a></p>
-				<p class='recommendation'><a href="javascript:showDetail('item2');">Customer ABC does not seem to be spending as much as they did	, down 48% from the average of the last 4 quarters.<img class='detail' src="images/detail.png"/>Detail</a></p>
-				<p class='recommendation'><a href="javascript:showDetail('item3');">The average increase in spend this quarter for all customers is 25%, which is 3 times higher than the normal increase at this time of year.<img class='detail' src="images/detail.png"/>Detail</a></p>
+			<div class='widget_list' id="insights">
+				<h3>Customer XYZ has increased spending 350%, which has placed them at the top of the "most valued customer" list.</h3>
+				<div class="detail">
+					<h4>Customer XYZ</h4>
+					<table border=1>
+						<tr><th>Quarter</th><th>Spend</th></tr>
+						<tr><td>Q3 2014</td><td>$340.00</td></tr>
+						<tr><td>Q4 2014</td><td>$1,190.00</td></tr>
+					</table>
+					<div class="reasons">
+						<ul>
+							<li>Customer XYZ's Influence Quotient has increased by 19 points.</li>
+						</ul>
+					</div>
+					<table border=1>
+						<tr><th>Customer</th><th>Influence Quotient</th></tr>
+						<tr><td>Customer XYZ</td><td>179</td></tr>
+						<tr><td>Customer QRS</td><td>111</td></tr>
+						<tr><td>Customer ABC</td><td>66</td></tr>
+					</table> 
+				</div>
+				<h3>Customer ABC does not seem to be spending as much as they did, down 48% from the average of the last 4 quarters.</h3>
+				<div class="detail">
+					<h4>Customer ABC</h4>
+					<table border=1>
+					<tr><th>Quarter</th><th>Spend</th></tr>
+					<tr><td>Q4 2013</td><td>$780.00</td></tr>
+					<tr><td>Q1 2014</td><td>$620.00</td></tr>
+					<tr><td>Q2 2014</td><td>$670.00</td></tr>
+					<tr><td>Q3 2014</td><td>$650.00</td></tr>
+					<tr><td>Q4 2014</td><td>$351.00</td></tr>
+					</table> 
+					<div class="graph"><img src="images/graph1.png"/></div>
+				</div>
+				<h3>The average increase in spend this quarter for all customers is 25%, which is 3 times higher than the normal increase at this time of year.</h3>
+				<div class="detail">
+				<h4>Customer Average Spend</h4>
+				<table border=1>
+					<tr><th>Quarter</th><th>Spend</th></tr>
+					<tr><td>Average Q3</td><td>$147.00</td></tr>
+					<tr><td>Average Q4</td><td>$159.25</td></tr>
+					<tr><td>Q3 2014</td><td>$150.00</td></tr>
+					<tr><td>Q4 2014</td><td>$187.00</td></tr>
+				</table>
+				<div class="graph"><img src="images/graph2.png"/></div>
+				</div>
 			</div>
-		  </div>
+		</div>
 		 <div class='small_widget'>
 			  <span class='small_widget_header'>Recommendations</span>
 			  <img class='small_widget_image' src='images/recommend.png'/> 
-				<div class='widget_list'>
-				<p class='recommendation'><a href="javascript:showDetail('recommendation1');"><span  id='recommendation1'>Target Customer XYZ is predicted to be a strong influencer. Contact Customer XYZ's Facebook circle and offer 10% discounted rates.<img class='detail' src="images/detail.png"/>Detail</a></span></p>
-				<p class='recommendation'><a href="javascript:showDetail('recommendation2');"><span  id='recommendation2'>Target Customer ABC is predicted to be considering leaving. Contact Customer ABC and offer free upgrade to Enchanged Package.<img class='detail' src="images/detail.png"/>Detail</a></span></p>
-				<p class='recommendation'><a href="javascript:showDetail('recommendation3');"><span  id='recommendation3'>Target Customer ABC is predicted to be considering leaving. Contact Customer ABC's Facebook circle and offer free upgrade to Enchanged Package.<img class='detail' src="images/detail.png"/>Detail</a></span></p>
-			
+				<div class='widget_list' id="recommendations">
+					<h3>Target Customer XYZ is predicted to be a strong influencer. Contact Customer XYZ's Facebook circle and offer 10% discounted rates.</h3>
+					<div class="detail">
+					<h4>Customer XYZ</h4>
+					<table border=1>
+						<tr><th>Quarter</th><th>Spend</th></tr>
+						<tr><td>Q3 2014</td><td>$340.00</td></tr>
+						<tr><td>Q4 2014</td><td>$1,190.00</td></tr>
+					</table>
+					<div class="reasons">
+						<ul>
+							<li>Customer XYZ has 5 Facebook friends that are also customers.</li>
+							<li>10% discount is predicted to have 87% efficacy rate due to Customer XYZ's influence.</li>
+						</ul>
+					</div>
+					<div class="acceptButton"><button name="Accept" onClick="acceptAction(\'recommendation1\')">Accept</button></div>
+					</div>
+					<h3>Customer ABC is predicted to be considering leaving. Contact Customer ABC and offer free upgrade to Enhanced Package.</h3>
+					<div class="detail">
+					<h4>Customer ABC</h4>
+						<table border=1>
+							<tr><th>Quarter</th><th>Spend</th></tr>
+							<tr><td>Q3 2014</td><td>$650.00</td></tr>
+							<tr><td>Q4 2014</td><td>$351.00</td></tr>
+						</table>
+						<div class="reasons">
+							<ul>
+								<li>Customer ABC has "pinned" 3 competitive proudcts on Pintrest in the last month.</li>
+								<li>Enhanced Package Offer rate is predicted to increase customer satisfaction ranking by 35%.</li>
+							</ul>
+						</div>
+						<div class="acceptButton"><button name="Accept" onClick="acceptAction(\'recommendation2\')">Accept</button></div>
+						<div class="rejectButton"><button name="Reject" onClick="rejectAction(\'recommendation2\')">Reject</button></div>
+					</div>
+					<h3>Target Customer ABC is predicted to be considering leaving. Contact Customer ABC's Facebook circle and offer free upgrade to Enhanced Package.</h3>
+					<div class="detail">
+					<h4>Customer ABC</h4>
+						<table border=1>
+							<tr><th>Quarter</th><th>Spend</th></tr>
+							<tr><td>Q3 2014</td><td>$650.00</td></tr>
+							<tr><td>Q4 2014</td><td>$351.00</td></tr>
+						</table>
+						<div class="reasons">
+							<ul>
+								<li>Customer ABC has "pinned" 3 competitive proudcts on Pintrest in the last month.</li>
+								<li>Enhanced Package Offer rate is predicted to increase customer satisfaction ranking by 35%.</li>
+							</ul>
+						</div>
+						<div class="acceptButton"><button name="Accept" onClick="acceptAction(\'recommendation3\')">Accept</button></div>
+					</div>
 				</div>
 		 </div>
 		<div class='large_widget'>
 			<span class='large_widget_header'>Return on Marketing Campaigns to Date</span>
-			  <div class='campaign' > 
-					<span id='campaign1'> </span>
-					<br/>
-					<div  class='campaign_bar'>
-						<div  class='current_bar' id='campaign_bar1'> </div> 
-					</div>Goal
-				</div>
-			  <div class='campaign' >
-					<span id='campaign2'> </span>
-					<br/>
-					<div  class='campaign_bar'>
-						<div  class='current_bar' id='campaign_bar2'> </div> 
-					</div>Goal
-				</div>
-			  <div class='campaign'>
-						<span id='campaign3'> </span>
-						<br/>
-						<div  class='campaign_bar'>
-							<div  class='current_bar'  id='campaign_bar3'> </div> 
-						</div>Goal
-				</div>
+			<div class="campaign_bar" id='campaign_bar1'><div class="campaign_bar_label" id="campaign_bar1_label"></div></div> 
+			<div class="campaign_bar" id='campaign_bar2'><div class="campaign_bar_label" id="campaign_bar2_label"></div></div> 
+			<div class="campaign_bar" id='campaign_bar3'><div class="campaign_bar_label" id="campaign_bar3_label"></div></div>
+			
 		</div>
 	</div>
 </body>
