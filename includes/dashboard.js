@@ -128,14 +128,22 @@ function acceptAction(recommendation) {
 		e.disabled="true";
 		var e=document.getElementById("reject1");
 		e.style.display="none";
+		
+		t=document.getElementById("historyTable1");
+		var currentTable=t.innerHTML;
+		t.innerHTML=currentTable.replace("</tbody>","<tr><td>" + getPrintDate().replace(/ .*/,"") + "</td><td>10% Discount Offer</td><td>87% efficacy</td><td>Result Pending</td></tr></tbody>");
 	} else if ( recommendation == "recommendation2" ) {
 		alert('Accepted. Upgrade package offer sent to Customer ABC.');
 		var e=document.getElementById("accept2");
 		e.style.background="green";
-				$("#accept2 span").text('Accepted!');
+		$("#accept2 span").text('Accepted!');
 		e.disabled="true";
 		var e=document.getElementById("reject2");
 		e.style.display="none";
+		
+		t=document.getElementById("historyTable2");
+		var currentTable=t.innerHTML;
+		t.innerHTML=currentTable.replace("</tbody>","<tr><td>" + getPrintDate().replace(/ .*/,"") + "</td><td>Enhanced Offer for Customer</td><td>89% efficacy</td><td>Result Pending</td></tr></tbody>");
 	} else if ( recommendation == "recommendation3" ) {
 		alert('Accepted. Upgrade packages offer sent.');
 		var e=document.getElementById("accept3");
@@ -144,6 +152,10 @@ function acceptAction(recommendation) {
 		e.disabled="true";
 		var e=document.getElementById("reject3");
 		e.style.display="none";
+		
+		t=document.getElementById("historyTable3");
+		var currentTable=t.innerHTML;
+		t.innerHTML=currentTable.replace("</tbody>","<tr><td>" + getPrintDate().replace(/ .*/,"") + "</td><td>Enhanced Offer for Related Customer</td><td>82% efficacy</td><td>Result Pending</td></tr></tbody>");
 	}
 }
 
