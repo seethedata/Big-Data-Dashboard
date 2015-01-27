@@ -12,16 +12,9 @@ $(function() {
 });
 
 $(function() {
-	$( "#recommendation1").accordion({collapsible: true, active : false, heightStyle : "content"});
+	$( "#recommendations").accordion({collapsible: true, active : false, heightStyle : "content"});
  });
 
- $(function() {
-	$( "#recommendation2").accordion({collapsible: true, active : false, heightStyle : "content"});
- });
- 
- $(function() {
-	$( "#recommendation3").accordion({collapsible: true, active : false, heightStyle : "content"});
- });
  
 $(function() {
 	$("#headline").progressbar({max : 1, value :1});
