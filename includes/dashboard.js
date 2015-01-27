@@ -12,19 +12,49 @@ $(function() {
 });
 
 $(function() {
-	$( "#recommendations").accordion({collapsible: true, active : false, heightStyle : "content"});
+	$( "#recommendation1").accordion({collapsible: true, active : false, heightStyle : "content"});
  });
 
+ $(function() {
+	$( "#recommendation2").accordion({collapsible: true, active : false, heightStyle : "content"});
+ });
+ 
+ $(function() {
+	$( "#recommendation3").accordion({collapsible: true, active : false, heightStyle : "content"});
+ });
+ 
 $(function() {
 	$("#headline").progressbar({max : 1, value :1});
 	updateHeadline();
 });	
 
 $(function() {
-	$("button")
-	.button()
+	$(".acceptButton").button({icons :  {primary : "ui-icon-check"}});
 });
 
+$(function() {
+	$(".rejectButton").button({icons :  {primary : "ui-icon-circle-close"}});
+});
+
+$(function() {
+	$(".historyButton").button({icons :  {primary : "ui-icon-calendar"}});
+});
+
+$(function() {
+	var dialog_width=window.innerWidth * .8;
+	$("#history1").dialog({autoOpen: false, width : dialog_width});
+});
+
+$(function() {
+	var dialog_width=window.innerWidth * .8;
+	$("#history2").dialog({autoOpen: false, width : dialog_width});
+});
+
+
+$(function() {
+	var dialog_width=window.innerWidth * .8;
+	$("#history3").dialog({autoOpen: false, width : dialog_width});
+});
 
 function getPrintDate() {
 	var currentDate=new Date();
@@ -73,7 +103,7 @@ function updateHeadline() {
 	var averageSale=getAvgSaleSize();
 	var activeCustomerCount = getActiveCustomerCount();
 	var unitsProduced = getUnitsProduced();
-	var headlineText=" Key Performance Metrics as of " + printDate  	
+	var headlineText=" Key Performance Indicators as of " + printDate  	
 									+ " | Average Sale Size: " + averageSale.toLocaleString(	'en-US',{style : "currency",  currency : "USD", currencyDisplay : "symbol"})  
 									+ " | Active Website Customers: " + activeCustomerCount .toLocaleString('en-US')  
 									+ " | Units Produced: " + unitsProduced .toLocaleString("en-US") ;
@@ -99,11 +129,62 @@ function updateCampaigns() {
 function acceptAction(recommendation) {
 	if (recommendation == "recommendation1") {
 		alert('Accepted. 10% discount rates sent.');
+		var e=document.getElementById("accept1");
+		e.style.background="green";
+		$("#accept1 span").text('Accepted!');
+		e.disabled="true";
+		var e=document.getElementById("reject1");
+		e.style.display="none";
 	} else if ( recommendation == "recommendation2" ) {
 		alert('Accepted. Upgrade package offer sent to Customer ABC.');
+		var e=document.getElementById("accept2");
+		e.style.background="green";
+				$("#accept2 span").text('Accepted!');
+		e.disabled="true";
+		var e=document.getElementById("reject2");
+		e.style.display="none";
 	} else if ( recommendation == "recommendation3" ) {
 		alert('Accepted. Upgrade packages offer sent.');
+		var e=document.getElementById("accept3");
+		e.style.background="green";
+		$("#accept3 span").text('Accepted!');
+		e.disabled="true";
+		var e=document.getElementById("reject3");
+		e.style.display="none";
 	}
-	/*e=document.getElementById(recommendation);
-	e.style.display='none'; */
+}
+
+function rejectAction(recommendation) {
+		if (recommendation == "recommendation1") {
+		var e=document.getElementById("accept1");
+		e.style.display="none";
+		var e=document.getElementById("reject1");
+		e.style.background="red";
+		$("#reject1 span").text('Rejected!');
+		e.disabled="true";
+	} else if ( recommendation == "recommendation2" ) {
+		var e=document.getElementById("accept2");
+		e.style.display="none";
+		var e=document.getElementById("reject2");
+		e.style.background="red";
+		$("#reject2 span").text('Rejected!');
+		e.disabled="true";
+	} else if ( recommendation == "recommendation3" ) {
+		var e=document.getElementById("accept3");
+		e.style.display="none";
+		var e=document.getElementById("reject3");
+		e.style.background="red";
+		$("#reject3 span").text('Rejected!');
+		e.disabled="true";
+	}
+}
+
+function historyAction(recommendation) {
+	if (recommendation == "recommendation1") {	
+		$("#history1").dialog("open");
+	} else if ( recommendation == "recommendation2" ) {
+		$("#history2").dialog("open");
+	} else if ( recommendation == "recommendation3" ) {
+		$("#history3").dialog("open");
+	}
 }

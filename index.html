@@ -8,11 +8,9 @@
 	<script src="includes/dashboard.js"></script>
 	
 </head>
-
 <body onLoad='updateHeadline();updateCampaigns()'>
 	<div id='dashboard'>
 		<div  id='headline'><div id="headline_label"></div></div>
-		<div id='itemDetail' onclick="javascript:getElementById('itemDetail').style.display='none'"> </div>
 		 <div class='small_widget'>
 			<span class='small_widget_header'>Insights</span>
 			<img class='small_widget_image' src='images/insight.png'/>
@@ -67,9 +65,9 @@
 		 <div class='small_widget'>
 			  <span class='small_widget_header'>Recommendations</span>
 			  <img class='small_widget_image' src='images/recommend.png'/> 
-				<div class='widget_list' id="recommendations">
-					<h3>Target Customer XYZ is predicted to be a strong influencer. Contact Customer XYZ's Facebook circle and offer 10% discounted rates.</h3>
-					<div class="detail">
+				<div class='first_widget_list' id="recommendation1">
+					<h3 id="recommendation1">Target Customer XYZ is predicted to be a strong influencer. Contact Customer XYZ's Facebook circle and offer 10% discounted rates.</h3>
+					<div class="detail" id="recommendation1-detail">
 					<h4>Customer XYZ</h4>
 					<table border=1>
 						<tr><th>Quarter</th><th>Spend</th></tr>
@@ -82,10 +80,50 @@
 							<li>10% discount is predicted to have 87% efficacy rate due to Customer XYZ's influence.</li>
 						</ul>
 					</div>
-					<div class="acceptButton"><button name="Accept" onClick="acceptAction('recommendation1')">Accept</button></div>
+					<div class="action_buttons">
+						<button name="Accept"  class="acceptButton" onClick="acceptAction('recommendation1')" id="accept1">Accept</button>
+						<button name="Reject"  class="rejectButton" onClick="rejectAction('recommendation1')" id="reject1">Reject</button>
+						<button name="History"  class="historyButton" onClick="historyAction('recommendation1')" >History</button>
 					</div>
-					<h3>Customer ABC is predicted to be considering leaving. Contact Customer ABC and offer free upgrade to Enhanced Package.</h3>
-					<div class="detail">
+					<div class="historyDetail" id='history1' title="Event History">
+					<table class="historyTable" border=1>
+						<tr>
+							<th>Date</th>
+							<th>Recommendation</th>
+							<th>Prediction</th>
+							<th>Result</th>
+						</tr>
+						<tr>
+							<td>12/17/2014</td>
+							<td>10% Discount Offer</td>
+							<td>85% efficacy</td>
+							<td>Customer value increased $2500.00.</td>
+						</tr>
+						<tr>
+							<td>11/03/2014</td>
+							<td>10% Discount Offer</td>
+							<td>81% efficacy</td>
+							<td>Customer value increased $1100.00.</td>
+						</tr>
+						<tr>
+							<td>10/26/2014</td>
+							<td>10% Discount Offer</td>
+							<td>65% efficacy</td>
+							<td>Customer value increased $250.00.</td>
+						</tr>
+						<tr>
+							<td>10/15/2014</td>
+							<td>10% Discount Offer</td>
+							<td>89% efficacy</td>
+							<td>Customer value increased $2700.00.</td>
+						</tr>
+					</table>
+					</div>
+					</div>
+				</div>
+				<div class='widget_item' id="recommendation2">
+					<h3 id="recommendation2">Customer ABC is predicted to be considering leaving. Contact Customer ABC and offer free upgrade to Enhanced Package.</h3>
+					<div class="detail" id="recommendation2-detail">
 					<h4>Customer ABC</h4>
 						<table border=1>
 							<tr><th>Quarter</th><th>Spend</th></tr>
@@ -94,15 +132,54 @@
 						</table>
 						<div class="reasons">
 							<ul>
-								<li>Customer ABC has "pinned" 3 competitive proudcts on Pintrest in the last month.</li>
+								<li>Customer ABC has "pinned" 3 competitive products on Pintrest in the last month.</li>
 								<li>Enhanced Package Offer rate is predicted to increase customer satisfaction ranking by 35%.</li>
 							</ul>
 						</div>
-						<div class="acceptButton"><button name="Accept" onClick="acceptAction('recommendation2')">Accept</button></div>
-						<div class="rejectButton"><button name="Reject" onClick="rejectAction('recommendation2')">Reject</button></div>
+						<div class="action_buttons">
+							<button name="Accept" class="acceptButton" onClick="acceptAction('recommendation2')" id="accept2">Accept</button>
+							<button name="Reject" class="rejectButton" onClick="rejectAction('recommendation2')" id="reject2">Reject</button>
+							<button name="History"  class="historyButton" onClick="historyAction('recommendation2')">History</button>	
+						</div>
+						<div class="historyDetail" id='history2' title="Event History">
+						<table class="historyTable" border=1>
+							<tr>
+								<th>Date</th>
+								<th>Recommendation</th>
+								<th>Prediction</th>
+								<th>Result</th>
+							</tr>
+							<tr>
+								<td>12/17/2014</td>
+								<td>Enhanced Offer for Customer</td>
+								<td>85% efficacy</td>
+								<td>Customer value increased $2500.00.</td>
+							</tr>
+							<tr>
+								<td>11/03/2014</td>
+								<td>Enhanced Offer for Customer</td>
+								<td>81% efficacy</td>
+								<td>Customer value increased $1100.00.</td>
+							</tr>
+							<tr>
+								<td>10/26/2014</td>
+								<td>Enhanced Offer for Customer</td>
+								<td>65% efficacy</td>
+								<td>Customer value increased $250.00.</td>
+							</tr>
+							<tr>
+								<td>10/15/2014</td>
+								<td>Enhanced Offer for Customer</td>
+								<td>89% efficacy</td>
+								<td>Customer value increased $2700.00.</td>
+							</tr>
+						</table>
+						</div>
 					</div>
-					<h3>Target Customer ABC is predicted to be considering leaving. Contact Customer ABC's Facebook circle and offer free upgrade to Enhanced Package.</h3>
-					<div class="detail">
+				</div>
+				<div class='widget_item' id="recommendation3">
+					<h3 id="recommendation3">Target Customer ABC is predicted to be considering leaving. Contact Customer ABC's Facebook circle and offer free upgrade to Enhanced Package.</h3>
+					<div class="detail" id="recommendation3-detail">
 					<h4>Customer ABC</h4>
 						<table border=1>
 							<tr><th>Quarter</th><th>Spend</th></tr>
@@ -111,11 +188,49 @@
 						</table>
 						<div class="reasons">
 							<ul>
-								<li>Customer ABC has "pinned" 3 competitive proudcts on Pintrest in the last month.</li>
+								<li>Customer ABC has "pinned" 3 competitive products on Pintrest in the last month.</li>
 								<li>Enhanced Package Offer rate is predicted to increase customer satisfaction ranking by 35%.</li>
 							</ul>
 						</div>
-						<div class="acceptButton"><button name="Accept" onClick="acceptAction('recommendation3')">Accept</button></div>
+						<div class="action_buttons">
+							<button name="Accept"  class="acceptButton" onClick="acceptAction('recommendation3')" id="accept3">Accept</button>
+							<button name="Reject"  class="rejectButton" onClick="rejectAction('recommendation3')" id="reject3">Reject</button>
+							<button name="History"  class="historyButton" onClick="historyAction('recommendation3')">History</button>	
+						</div>
+						<div class="historyDetail" id='history3' title="Event History">
+						<table class="historyTable" border=1>
+							<tr>
+								<th>Date</th>
+								<th>Recommendation</th>
+								<th>Prediction</th>
+								<th>Result</th>
+							</tr>
+							<tr>
+								<td>12/17/2014</td>
+								<td>Enhanced Offer for Related Customer</td>
+								<td>85% efficacy</td>
+								<td>Customer value increased $2500.00.</td>
+							</tr>
+							<tr>
+								<td>11/03/2014</td>
+								<td>Enhanced Offer for Related Customer</td>
+								<td>81% efficacy</td>
+								<td>Customer value increased $1100.00.</td>
+							</tr>
+							<tr>
+								<td>10/26/2014</td>
+								<td>Enhanced Offer for Related Customer</td>
+								<td>65% efficacy</td>
+								<td>Customer value increased $250.00.</td>
+							</tr>
+							<tr>
+								<td>10/15/2014</td>
+								<td>Enhanced Offer for Related Customer</td>
+								<td>89% efficacy</td>
+								<td>Customer value increased $2700.00.</td>
+							</tr>
+						</table>
+						</div>
 					</div>
 				</div>
 		 </div>
