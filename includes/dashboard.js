@@ -15,12 +15,12 @@ $(function() {
 	$( "#recommendations").accordion({collapsible: true, active : false, heightStyle : "content"});
  });
 
- 
+ /*
 $(function() {
 	$("#headline").progressbar({max : 1, value :1});
 	updateHeadline();
 });	
-
+*/
 $(function() {
 	$(".acceptButton").button({icons :  {primary : "ui-icon-check"}});
 });
@@ -96,7 +96,7 @@ function updateHeadline() {
 	var averageSale=getAvgSaleSize();
 	var activeCustomerCount = getActiveCustomerCount();
 	var unitsProduced = getUnitsProduced();
-	var headlineText=" Key Performance Indicators as of " + printDate  	
+	var headlineText=" KPIs as of " + printDate  	
 									+ " | Average Sale Size: " + averageSale.toLocaleString(	'en-US',{style : "currency",  currency : "USD", currencyDisplay : "symbol"})  
 									+ " | Active Website Customers: " + activeCustomerCount .toLocaleString('en-US')  
 									+ " | Units Produced: " + unitsProduced .toLocaleString("en-US") ;
