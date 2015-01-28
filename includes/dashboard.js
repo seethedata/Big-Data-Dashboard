@@ -155,7 +155,7 @@ function acceptAction(recommendation) {
 		
 		t=document.getElementById("historyTable3");
 		var currentTable=t.innerHTML;
-		t.innerHTML=currentTable.replace("</tbody>","<tr><td>" + getPrintDate().replace(/ .*/,"") + "</td><td>Enhanced Offer for Related Customer</td><td>82% efficacy</td><td>Result Pending</td></tr></tbody>");
+		t.innerHTML=currentTable.replace("</tbody>","<tr><td>" + getPrintDate().replace(/ .*/,"") + "</td><td>Enhanced Offer for Related Customer</td><td>50% efficacy</td><td>Result Pending</td></tr></tbody>");
 	}
 }
 
