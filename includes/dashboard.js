@@ -96,7 +96,7 @@ function updateHeadline() {
 	var averageSale=getAvgSaleSize();
 	var activeCustomerCount = getActiveCustomerCount();
 	var unitsProduced = getUnitsProduced();
-	var headlineText=" KPIs as of " + printDate  	
+	var headlineText=" Key Performance Indicators as of " + printDate  	
 									+ " | Average Sale Size: " + averageSale.toLocaleString(	'en-US',{style : "currency",  currency : "USD", currencyDisplay : "symbol"})  
 									+ " | Active Website Customers: " + activeCustomerCount .toLocaleString('en-US')  
 									+ " | Units Produced: " + unitsProduced .toLocaleString("en-US") ;
