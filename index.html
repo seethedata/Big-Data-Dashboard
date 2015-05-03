@@ -1,132 +1,344 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<link rel="stylesheet" type="text/css" href="includes/dashboard.css">
-  	<script src="includes/jquery-1.11.2.min.js"></script>
-	<link rel="stylesheet" href="includes/jquery-ui.css">
-  	<script src="includes/jquery-ui.js"></script>
-	<script src="includes/dashboard.js"></script>
-	
-</head>
 
-<body onLoad='updateHeadline();updateCampaigns()'>
-	<div id='dashboard'>
-		<div id='headline'><span id='headlineText' > </span>
-		</div>
-		<div id='itemDetail' onclick="javascript:getElementById('itemDetail').style.display='none'"> </div>
-		 <div class='small_widget'>
-			<span class='small_widget_header'>Insights</span>
-			<img class='small_widget_image' src='images/insight.png'/>
-			<div class='widget_list' id="insights">
-				<h3>Customer XYZ has increased spending 350%, which has placed them at the top of the "most valued customer" list.</h3>
-				<div class="detail">
-					<h4>Customer XYZ</h4>
-					<table border=1>
-						<tr><th>Quarter</th><th>Spend</th></tr>
-						<tr><td>Q3 2014</td><td>$340.00</td></tr>
-						<tr><td>Q4 2014</td><td>$1,190.00</td></tr>
-					</table>
-					<div class="reasons">
-						<ul>
-							<li>Customer XYZ's Influence Quotient has increased by 19 points.</li>
-						</ul>
-					</div>
-					<table border=1>
-						<tr><th>Customer</th><th>Influence Quotient</th></tr>
-						<tr><td>Customer XYZ</td><td>179</td></tr>
-						<tr><td>Customer QRS</td><td>111</td></tr>
-						<tr><td>Customer ABC</td><td>66</td></tr>
-					</table> 
-				</div>
-				<h3>Customer ABC does not seem to be spending as much as they did, down 48% from the average of the last 4 quarters.</h3>
-				<div class="detail">
-					<h4>Customer ABC</h4>
-					<table border=1>
-					<tr><th>Quarter</th><th>Spend</th></tr>
-					<tr><td>Q4 2013</td><td>$780.00</td></tr>
-					<tr><td>Q1 2014</td><td>$620.00</td></tr>
-					<tr><td>Q2 2014</td><td>$670.00</td></tr>
-					<tr><td>Q3 2014</td><td>$650.00</td></tr>
-					<tr><td>Q4 2014</td><td>$351.00</td></tr>
-					</table> 
-					<div class="graph"><img src="images/graph1.png"/></div>
-				</div>
-				<h3>The average increase in spend this quarter for all customers is 25%, which is 3 times higher than the normal increase at this time of year.</h3>
-				<div class="detail">
-				<h4>Customer Average Spend</h4>
-				<table border=1>
-					<tr><th>Quarter</th><th>Spend</th></tr>
-					<tr><td>Average Q3</td><td>$147.00</td></tr>
-					<tr><td>Average Q4</td><td>$159.25</td></tr>
-					<tr><td>Q3 2014</td><td>$150.00</td></tr>
-					<tr><td>Q4 2014</td><td>$187.00</td></tr>
-				</table>
-				<div class="graph"><img src="images/graph2.png"/></div>
-				</div>
-			</div>
-		</div>
-		 <div class='small_widget'>
-			  <span class='small_widget_header'>Recommendations</span>
-			  <img class='small_widget_image' src='images/recommend.png'/> 
-				<div class='widget_list' id="recommendations">
-					<h3>Target Customer XYZ is predicted to be a strong influencer. Contact Customer XYZ's Facebook circle and offer 10% discounted rates.</h3>
-					<div class="detail">
-					<h4>Customer XYZ</h4>
-					<table border=1>
-						<tr><th>Quarter</th><th>Spend</th></tr>
-						<tr><td>Q3 2014</td><td>$340.00</td></tr>
-						<tr><td>Q4 2014</td><td>$1,190.00</td></tr>
-					</table>
-					<div class="reasons">
-						<ul>
-							<li>Customer XYZ has 5 Facebook friends that are also customers.</li>
-							<li>10% discount is predicted to have 87% efficacy rate due to Customer XYZ's influence.</li>
-						</ul>
-					</div>
-					<div class="acceptButton"><button name="Accept" onClick="acceptAction(\'recommendation1\')">Accept</button></div>
-					</div>
-					<h3>Customer ABC is predicted to be considering leaving. Contact Customer ABC and offer free upgrade to Enhanced Package.</h3>
-					<div class="detail">
-					<h4>Customer ABC</h4>
-						<table border=1>
-							<tr><th>Quarter</th><th>Spend</th></tr>
-							<tr><td>Q3 2014</td><td>$650.00</td></tr>
-							<tr><td>Q4 2014</td><td>$351.00</td></tr>
-						</table>
-						<div class="reasons">
-							<ul>
-								<li>Customer ABC has "pinned" 3 competitive proudcts on Pintrest in the last month.</li>
-								<li>Enhanced Package Offer rate is predicted to increase customer satisfaction ranking by 35%.</li>
-							</ul>
-						</div>
-						<div class="acceptButton"><button name="Accept" onClick="acceptAction(\'recommendation2\')">Accept</button></div>
-						<div class="rejectButton"><button name="Reject" onClick="rejectAction(\'recommendation2\')">Reject</button></div>
-					</div>
-					<h3>Target Customer ABC is predicted to be considering leaving. Contact Customer ABC's Facebook circle and offer free upgrade to Enhanced Package.</h3>
-					<div class="detail">
-					<h4>Customer ABC</h4>
-						<table border=1>
-							<tr><th>Quarter</th><th>Spend</th></tr>
-							<tr><td>Q3 2014</td><td>$650.00</td></tr>
-							<tr><td>Q4 2014</td><td>$351.00</td></tr>
-						</table>
-						<div class="reasons">
-							<ul>
-								<li>Customer ABC has "pinned" 3 competitive proudcts on Pintrest in the last month.</li>
-								<li>Enhanced Package Offer rate is predicted to increase customer satisfaction ranking by 35%.</li>
-							</ul>
-						</div>
-						<div class="acceptButton"><button name="Accept" onClick="acceptAction(\'recommendation3\')">Accept</button></div>
-					</div>
-				</div>
-		 </div>
-		<div class='large_widget'>
-			<span class='large_widget_header'>Return on Marketing Campaigns to Date</span>
-			<div class="campaign_bar" id='campaign_bar1'><div class="campaign_bar_label" id="campaign_bar1_label"></div></div> 
-			<div class="campaign_bar" id='campaign_bar2'><div class="campaign_bar_label" id="campaign_bar2_label"></div></div> 
-			<div class="campaign_bar" id='campaign_bar3'><div class="campaign_bar_label" id="campaign_bar3_label"></div></div>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Big Data Dashboard</title>
+
+	<!-- Include d3 -->
+	<script src="js/d3.min.js"></script>
+    
+	<!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="css/dashboard.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+	<script>
+		function getAvgSaleSize() {
+			return getRandomNumber(250 ,100);
+		}
+
+		function getActiveCustomerCount() {
+			return  getRandomNumber(2000 ,1000);
+		}
+
+		function getUnitsProduced() {
+			return getRandomNumber(82,10);
+		}
+
+		function getRandomNumber(base, multiplier) {
+			return base + Math.round(Math.random()*multiplier);
+		}
+
+		function updateKPIs() {
+			var kpiData=[["Average Sale Size",getAvgSaleSize()],["Active Website Users",getActiveCustomerCount()],["Units Produced",getUnitsProduced()]];
+			var kpiDiv=d3.select(".kpis");
+			var kpis=kpiDiv.selectAll("div")
+					.data(kpiData);
+			kpis.exit().remove();
+			kpis.enter().append("div");
+			kpis
+				.style("background-color","steelblue")
+				.style("font-size", "5em")
+				.style("text-align", "center")
+				.style("color", "white")
+				.attr("class", function (d,i) { if (i == 0) { return "col-xs-3";} else { return "col-xs-3 col-md-offset-1";}})
+				.attr("id", function (d,i) {return "kpi" + i})
+				.text(function (d) {return d[1];});
+			kpis.append("h4")
+					.style("color", "white")
+					.text(function (d) {return d[0];})
+					.attr("class","lead")
+					.attr("id",function (d,i) {return "kpi" + i + "-label"});
+		}
+		
+		function updateInsights() {
+			var insightData=[["Customer XYZ has increased spending 350%, which has placed them at the top of the \"most valued customer\" list."],
+							["Customer ABC does not seem to be spending as much as they did, down 48% from the average of the last 4 quarters."],
+							["The average increase in spend this quarter for all customers is 25%, which is 3 times higher than the normal increase at this time of year."]];
+			var insightsDiv=d3.select(".insights");
+			var insights=insightsDiv.selectAll("div")
+				.data(insightData);
+			insights.exit().remove();
+			insights.enter().append("div");
+			insights
+				.text(function (d) {return d[0]});
+				
+		}
+	</script>
+	<script>
+	campaign1= 41173;
+	campaign2=204778;
+	campaign3=1002;
+
+	campaign1_goal=60000;
+	campaign2_goal=215000;
+	campaign3_goal=10000;
+
+	function updateCampaigns() {
+		if (campaign1 > campaign1_goal) {
+			true;
+		} else {
+			campaign1= campaign1 + 60;
+		}
+		
+		if (campaign2 > campaign2_goal) {
+			true;
+		} else {
+			campaign2= campaign2 + 10;
+		}
+		
+		if (campaign3 > campaign3_goal) {
+			true;
+		} else {
+			campaign3= campaign3 + 1;
+		}
+
+		
+		var campaignData=[["All Aboard",campaign1,campaign1_goal],["To the Max",campaign2,campaign2_goal],["Street Cred",campaign3,campaign3_goal]]
+		var campaignColors=["","progress-bar-success","progress-bar-danger"];
+		
+		var campaignDiv=d3.select(".campaigns");
+		var campaigns=campaignDiv.selectAll("div")
+					.data(campaignData);
+		campaigns.exit().remove();
+		campaigns.enter().append("div")
+			.append("span")
+			.text(function(d,i) {return d[0] + " - " + d[1]});
+		campaigns
+			.attr("class",function (d,i) { return "progress-bar " + campaignColors[i] + " progress-bar-striped" })
+			.attr("role","progressbar")
+			.attr("aria-valuenow",campaign1/campaign1_goal)
+			.attr("aria-valuemin",0)
+			.attr("aria-valuemax",100)
+			.attr("style",function (d,i) { return "width: " + d[1]*100/d[2] + "%" });
+		campaigns.selectAll("span")
+					.text(function(d,i) {return d[0] + " - " + d[1]});
 			
-		</div>
-	</div>
+
+		//$("#campaign_bar1").progressbar({max: campaign1_goal, value: campaign1});
+		//$("#campaign_bar1_label").text("\"Go the the Max\" : " + campaign1.toLocaleString('en-US',{style : "currency",  currency : "USD", currencyDisplay : "symbol"}));
+		//$("#campaign_bar2").progressbar({max: campaign2_goal, value: campaign2});
+		//$("#campaign_bar2_label").text("\"Street Cred\" : " + campaign2.toLocaleString('en-US',{style : "currency",  currency : "USD", currencyDisplay : "symbol"}));
+		//$("#campaign_bar3").progressbar({max: campaign3_goal, value: campaign3});
+		//$("#campaign_bar3_label").text("\"All Aboard!\" : " + campaign3.toLocaleString('en-US',{style : "currency",  currency : "USD", currencyDisplay : "symbol"}));
+	}
+
+	</script>
+  </head>
+
+  <body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Big Data Dashboard</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="#top">Dashboard</a></li>
+            <li><a href="#">Settings</a></li>
+            <li><a href="#">Profile</a></li>
+            <li><a href="#">Help</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+          <ul class="nav nav-sidebar">
+            <li class="active"><a href="#top">KPIs<span class="sr-only">(current)</span></a></li>
+            <li><a href="#insights">Insights</a></li>
+            <li><a href="#recommendations">Recommendations</a></li>
+            <li><a href="#campaigns">Campaigns</a></li>
+          </ul>
+        </div>
+		
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" id="top">
+			<h1 class="page-header">Dashboard</h1>
+			<div class="row kpis well" ></div>
+			<script>
+				updateKPIs();
+				window.setInterval(function() {updateKPIs()},1000);
+			</script>
+			
+			<div class="row insights well" id="insights">
+			<h2>Insights</h2>
+			</div>
+			<script>
+			updateInsights();
+			</script>
+			
+			<div class="row insights well" id="recommendations">
+			<h2>Recommendations</h2>
+			</div>
+			<script>
+			</script>
+			
+			<div class="row campaigns well" id="campaigns">
+				<h2>Marketing Campaigns</h2>
+			</div>
+			<script>
+				updateCampaigns();
+				window.setInterval(function() {updateCampaigns()},3000);
+			</script>
+			<!--
+		<h2 class="sub-header">Section title</h2>
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Header</th>
+                  <th>Header</th>
+                  <th>Header</th>
+                  <th>Header</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1,001</td>
+                  <td>Lorem</td>
+                  <td>ipsum</td>
+                  <td>dolor</td>
+                  <td>sit</td>
+                </tr>
+                <tr>
+                  <td>1,002</td>
+                  <td>amet</td>
+                  <td>consectetur</td>
+                  <td>adipiscing</td>
+                  <td>elit</td>
+                </tr>
+                <tr>
+                  <td>1,003</td>
+                  <td>Integer</td>
+                  <td>nec</td>
+                  <td>odio</td>
+                  <td>Praesent</td>
+                </tr>
+                <tr>
+                  <td>1,003</td>
+                  <td>libero</td>
+                  <td>Sed</td>
+                  <td>cursus</td>
+                  <td>ante</td>
+                </tr>
+                <tr>
+                  <td>1,004</td>
+                  <td>dapibus</td>
+                  <td>diam</td>
+                  <td>Sed</td>
+                  <td>nisi</td>
+                </tr>
+                <tr>
+                  <td>1,005</td>
+                  <td>Nulla</td>
+                  <td>quis</td>
+                  <td>sem</td>
+                  <td>at</td>
+                </tr>
+                <tr>
+                  <td>1,006</td>
+                  <td>nibh</td>
+                  <td>elementum</td>
+                  <td>imperdiet</td>
+                  <td>Duis</td>
+                </tr>
+                <tr>
+                  <td>1,007</td>
+                  <td>sagittis</td>
+                  <td>ipsum</td>
+                  <td>Praesent</td>
+                  <td>mauris</td>
+                </tr>
+                <tr>
+                  <td>1,008</td>
+                  <td>Fusce</td>
+                  <td>nec</td>
+                  <td>tellus</td>
+                  <td>sed</td>
+                </tr>
+                <tr>
+                  <td>1,009</td>
+                  <td>augue</td>
+                  <td>semper</td>
+                  <td>porta</td>
+                  <td>Mauris</td>
+                </tr>
+                <tr>
+                  <td>1,010</td>
+                  <td>massa</td>
+                  <td>Vestibulum</td>
+                  <td>lacinia</td>
+                  <td>arcu</td>
+                </tr>
+                <tr>
+                  <td>1,011</td>
+                  <td>eget</td>
+                  <td>nulla</td>
+                  <td>Class</td>
+                  <td>aptent</td>
+                </tr>
+                <tr>
+                  <td>1,012</td>
+                  <td>taciti</td>
+                  <td>sociosqu</td>
+                  <td>ad</td>
+                  <td>litora</td>
+                </tr>
+                <tr>
+                  <td>1,013</td>
+                  <td>torquent</td>
+                  <td>per</td>
+                  <td>conubia</td>
+                  <td>nostra</td>
+                </tr>
+                <tr>
+                  <td>1,014</td>
+                  <td>per</td>
+                  <td>inceptos</td>
+                  <td>himenaeos</td>
+                  <td>Curabitur</td>
+                </tr>
+                <tr>
+                  <td>1,015</td>
+                  <td>sodales</td>
+                  <td>ligula</td>
+                  <td>in</td>
+                  <td>libero</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+		  -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
 </body>
 </html>
