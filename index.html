@@ -1,6 +1,6 @@
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="fill">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -27,7 +27,7 @@
     <![endif]-->
 	<script>
 		function getAvgSaleSize() {
-			return getRandomNumber(250 ,100);
+			return getRandomNumber(250 ,100).toLocaleString('en-US',{style : "currency",  currency : "USD", currencyDisplay : "symbol"});
 		}
 
 		function getActiveCustomerCount() {
@@ -79,29 +79,29 @@
 		}
 	</script>
 	<script>
-	campaign1= 41173;
-	campaign2=204778;
-	campaign3=1002;
+	var campaign1=41173;
+	var campaign2=204778;
+	var campaign3=10002;
 
-	campaign1_goal=60000;
-	campaign2_goal=215000;
-	campaign3_goal=10000;
+	var campaign1_goal=60000;
+	var campaign2_goal=215000;
+	var campaign3_goal=40000;
 
 	function updateCampaigns() {
 		if (campaign1 > campaign1_goal) {
-			true;
+			campaign1=campaign1_goal;
 		} else {
 			campaign1= campaign1 + 60;
 		}
 		
 		if (campaign2 > campaign2_goal) {
-			true;
+			campaign2 = campaign2_goal;
 		} else {
 			campaign2= campaign2 + 10;
 		}
 		
 		if (campaign3 > campaign3_goal) {
-			true;
+			campaign3=campaign3_goal;
 		} else {
 			campaign3= campaign3 + 1;
 		}
@@ -116,30 +116,25 @@
 		campaigns.exit().remove();
 		campaigns.enter().append("div")
 			.append("span")
-			.text(function(d,i) {return d[0] + " - " + d[1]});
+			.style("text-align", "left")
+			.text(function(d,i) {return d[0] + " - " + d[1].toLocaleString('en-US',{style : "currency",  currency : "USD", currencyDisplay : "symbol"})});
 		campaigns
 			.attr("class",function (d,i) { return "progress-bar " + campaignColors[i] + " progress-bar-striped" })
 			.attr("role","progressbar")
-			.attr("aria-valuenow",campaign1/campaign1_goal)
+			.attr("aria-valuenow",function (d) { return d[1]*100/d[2];})
 			.attr("aria-valuemin",0)
 			.attr("aria-valuemax",100)
 			.attr("style",function (d,i) { return "width: " + d[1]*100/d[2] + "%" });
-		campaigns.selectAll("span")
-					.text(function(d,i) {return d[0] + " - " + d[1]});
-			
-
-		//$("#campaign_bar1").progressbar({max: campaign1_goal, value: campaign1});
-		//$("#campaign_bar1_label").text("\"Go the the Max\" : " + campaign1.toLocaleString('en-US',{style : "currency",  currency : "USD", currencyDisplay : "symbol"}));
-		//$("#campaign_bar2").progressbar({max: campaign2_goal, value: campaign2});
-		//$("#campaign_bar2_label").text("\"Street Cred\" : " + campaign2.toLocaleString('en-US',{style : "currency",  currency : "USD", currencyDisplay : "symbol"}));
-		//$("#campaign_bar3").progressbar({max: campaign3_goal, value: campaign3});
-		//$("#campaign_bar3_label").text("\"All Aboard!\" : " + campaign3.toLocaleString('en-US',{style : "currency",  currency : "USD", currencyDisplay : "symbol"}));
+		campaigns
+			.style("font-size", "1.5em")
+			.style("text-align", "left")
+			.text(function(d,i) {return d[0] + " - " + d[1].toLocaleString('en-US',{style : "currency",  currency : "USD", currencyDisplay : "symbol"})});
 	}
 
 	</script>
   </head>
 
-  <body>
+  <body class="fill">
     <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container-fluid">
         <div class="navbar-header">
@@ -162,8 +157,8 @@
       </div>
     </nav>
 
-    <div class="container-fluid">
-      <div class="row">
+    <div class="container-fluid fill">
+      <div class="row fill">
         <div class="col-sm-3 col-md-2 sidebar">
           <ul class="nav nav-sidebar">
             <li class="active"><a href="#top">KPIs<span class="sr-only">(current)</span></a></li>
@@ -173,28 +168,29 @@
           </ul>
         </div>
 		
-        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" id="top">
-			<h1 class="page-header">Dashboard</h1>
-			<div class="row kpis well" ></div>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main fill" id="top">
+			<div class="kpis row well main fill	">
+			<h2>Key Performance Indicators</h2>
+			</div>
 			<script>
 				updateKPIs();
 				window.setInterval(function() {updateKPIs()},1000);
 			</script>
 			
-			<div class="row insights well" id="insights">
-			<h2>Insights</h2>
+			<div class="insights row well fill" id="insights">
+				<h2>Insights</h2>
 			</div>
 			<script>
 			updateInsights();
 			</script>
 			
-			<div class="row insights well" id="recommendations">
-			<h2>Recommendations</h2>
+			<div class="recommendations row well fill" id="recommendations">
+				<h2>Recommendations</h2>
 			</div>
 			<script>
 			</script>
 			
-			<div class="row campaigns well" id="campaigns">
+			<div class="campaigns row well fill" id="campaigns">
 				<h2>Marketing Campaigns</h2>
 			</div>
 			<script>

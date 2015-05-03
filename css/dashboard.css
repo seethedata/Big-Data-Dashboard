@@ -103,3 +103,18 @@ body {
   display: inline-block;
   border-radius: 50%;
 }
+
+.fill {
+	height : 100%;
+}
+
+/*
+div.kpis {
+	background-color : #777;
+}*/
+
+.progress-bar {
+	height : 20%;
+	margin-bottom : 5%;
+}
+
