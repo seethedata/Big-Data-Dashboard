@@ -1,0 +1,35 @@
+body { background-color : #FFFFFF;}
+a:link ,a:visited ,a:active ,a:hover { text-decoration : none ; font-size : 1.1em; color : #2C95DD;}
+img {border : none}
+
+div#dashboard {  width : 90% ; height : 85% ; margin-left : auto ; margin-right : auto; margin-top : 3em;}
+div#headline {  font-size : 1em; margin-top : 1em ; margin-bottom : 3em;  	}
+div#headline_label  {   color : #FFFFFF ; font-weight: bold; text-shadow: 1px 1px 0 #000; text-align : center; width : 100%; margin-left : auto ; margin-right : auto ; left : 0 ; right : 0; border-style: solid ; border-width: 2px; border-color : #AAAAAA;
+									border-radius : 4px; background-color : #2C95DD;}
+
+img.detail , img.accept { width : 3% ; height : 6%; }
+
+div#portNumber { width : 10% ; margin-left : auto ; margin-right : auto ; font-size : 2em  ; border : solid;}
+
+div.small_widget { width : 50% ; height : 45%; float : left; }
+div.large_widget { width : 100% ; height : 100%  ; }
+img.small_widget_image { height : 25% ; width : 10% ; border: none ; float : left ;}
+span.small_widget_header , span.large_widget_header { font-size : 2em;}
+div.campaign { height : 10% ; margin-bottom : 1.3em;}
+div.widget_list{ width : 95%; margin-top : 3em;}
+div.first_widget_list { margin-top : 2em; }
+div.historyDetail { width : 80% ; }
+table.historyTable { width : 80% ; margin-left : auto; margin-right :auto}
+
+div.detail { font-size : .8em}
+div.graph { width : 90% ;  margin-top : 1.2em}
+div.reasons {font-size : 1em; width : 80%; margin : auto}	
+span.graph {position : relative ; top : -9em ; left : 20%;}
+div#exit { position : absolute ; top : 90% ; right : 0%; width : 10% ; }
+img.exit { width : 30% ; height : 5% ;  }
+div.action_buttons {  width : 100%; margin-left : auto ; margin-right : auto ; text-align : center}
+
+.acceptButton { color : green }
+
+.campaign_bar { position: relative;	margin-bottom : 1em; }
+.campaign_bar_label { position: absolute; top: 4px; font-weight: bold; text-shadow: 1px 1px 0 #fff;  }
