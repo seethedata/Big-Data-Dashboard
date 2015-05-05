@@ -174,7 +174,12 @@
 				updateKPIs();
 				window.setInterval(function() {updateKPIs()},1000);
 			</script>
-			<div class="row col-lg-12 viewTarget" id="insightTarget"><hr/></div>
+
+			<div class="row col-lg-12 viewTarget text-center" id="insightTarget">			
+				<span class="glyphicon glyphicon-chevron-down down-button" aria-hidden="true" onClick="$.scrollTo('#insightTarget',800);"></span>
+				<hr/>
+			</div>
+			
 			<div class="insights row text-center fill col-lg-12" id="insights">
 				<h2>Insights</h2>
 				<div></div>
@@ -185,13 +190,19 @@
 			<script>
 			updateInsights();
 			</script>
-			<div class="row col-lg-12 viewTarget" id="recommendationTarget"><hr align="center"/></div>
+			<div class="row col-lg-12 viewTarget text-center" id="recommendationTarget">
+				<span class="glyphicon glyphicon-chevron-down down-button" aria-hidden="true" onClick="$.scrollTo('#recommendationTarget',800);"></span>
+				<hr/>
+			</div>
 			<div class="recommendations row fill col-lg-12" id="recommendations">
 				<h2>Recommendations</h2>
 			</div>
 			<script>
 			</script>
-			<div class="row col-lg-12 viewTarget" id="campaignTarget"><hr/></div>
+			<div class="row col-lg-12 viewTarget text-center" id="campaignTarget">
+				<span class="glyphicon glyphicon-chevron-down down-button" aria-hidden="true" onClick="$.scrollTo('#campaignTarget',800);"></span>
+				<hr/>
+			</div>
 			<div class="campaigns row fill col-lg-12" id="campaigns">
 				<h2>Marketing Campaigns</h2>
 				<div class="progress"></div>
