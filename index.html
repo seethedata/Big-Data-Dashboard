@@ -43,7 +43,9 @@
 		}
 
 		function updateKPIs() {
-			var kpiData=[["Average Sale Size",getAvgSaleSize()],["Active Website Users",getActiveCustomerCount()],["Units Produced",getUnitsProduced()]];
+			var kpiData=[["Average Sale Size",getAvgSaleSize()],["Active Website Users",getActiveCustomerCount()],["Units Produced",getUnitsProduced()],
+			["More",17],["Even More", 1672],["Add One More", 72],
+			["Something Else",144],["Another Thing",10000],["Final Number",8]]	;
 			var kpiDiv=d3.select(".kpis");
 			var kpis=kpiDiv.selectAll("div")
 					.data(kpiData);
@@ -54,7 +56,7 @@
 				.style("font-size", "5em")
 				.style("text-align", "center")
 				.style("color", "white")
-				.attr("class", function (d,i) { if (i == 0) { return "col-xs-3";} else { return "col-xs-3 col-md-offset-1";}})
+				.attr("class", function (d,i) { if (i == 0) { return "col-md-offset-1 col-md-3";} else { return "col-md-3 col-md-offset-1";}})
 				.attr("id", function (d,i) {return "kpi" + i})
 				.text(function (d) {return d[1];});
 			kpis.append("h4")
@@ -110,31 +112,26 @@
 		var campaignData=[["All Aboard",campaign1,campaign1_goal],["To the Max",campaign2,campaign2_goal],["Street Cred",campaign3,campaign3_goal]]
 		var campaignColors=["","progress-bar-success","progress-bar-danger"];
 		
-		var campaignDiv=d3.select(".campaigns");
-		var campaigns=campaignDiv.selectAll("div")
-					.data(campaignData);
-		campaigns.exit().remove();
+		/*var campaignDiv=d3.selectAll(".campaigns");
+		var campaigns=campaignDiv.selectAll(".progress");
 		campaigns.enter().append("div")
-			.append("span")
-			.style("text-align", "left")
-			.text(function(d,i) {return d[0] + " - " + d[1].toLocaleString('en-US',{style : "currency",  currency : "USD", currencyDisplay : "symbol"})});
-		campaigns
+				.data(campaignData)
 			.attr("class",function (d,i) { return "progress-bar " + campaignColors[i] + " progress-bar-striped" })
 			.attr("role","progressbar")
 			.attr("aria-valuenow",function (d) { return d[1]*100/d[2];})
 			.attr("aria-valuemin",0)
 			.attr("aria-valuemax",100)
-			.attr("style",function (d,i) { return "width: " + d[1]*100/d[2] + "%" });
-		campaigns
-			.style("font-size", "1.5em")
+			.attr("style",function (d,i) { return "width: " + d[1]*100/d[2] + "%" })
+			.append("span")
 			.style("text-align", "left")
 			.text(function(d,i) {return d[0] + " - " + d[1].toLocaleString('en-US',{style : "currency",  currency : "USD", currencyDisplay : "symbol"})});
+			*/
 	}
 
 	</script>
   </head>
 
-  <body class="fill">
+  <body class="fill" id="top">
     <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container-fluid">
         <div class="navbar-header">
@@ -148,56 +145,75 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="#top">Dashboard</a></li>
-            <li><a href="#">Settings</a></li>
-            <li><a href="#">Profile</a></li>
-            <li><a href="#">Help</a></li>
+            <li><a onClick="$.scrollTo('#top',800);">Key Performance Indicators</a></li>
+            <li><a onClick="$.scrollTo('#insightTarget',800);">Insights</a></li>
+            <li><a onClick="$.scrollTo('#recommendationTarget',800);">Recommendations</a></li>
+            <li><a onClick="$.scrollTo('#campaignTarget',800);">Campaigns</a></li>
           </ul>
         </div>
       </div>
     </nav>
 
-    <div class="container-fluid fill">
-      <div class="row fill">
-        <div class="col-sm-3 col-md-2 sidebar">
-          <ul class="nav nav-sidebar">
-            <li class="active"><a href="#top">KPIs<span class="sr-only">(current)</span></a></li>
-            <li><a href="#insights">Insights</a></li>
-            <li><a href="#recommendations">Recommendations</a></li>
-            <li><a href="#campaigns">Campaigns</a></li>
-          </ul>
-        </div>
-		
-        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main fill" id="top">
-			<div class="kpis row well main fill	">
-			<h2>Key Performance Indicators</h2>
+	<div class="container-fluid fill">
+		<div class="row fill">
+			<div class="kpis row fill text-center col-lg-12" id="kpis">
+				<h2>Key Performance Indicators</h2>
+				<div><h4></h4></div>
+				<div><h4></h4></div>
+				<div><h4></h4></div>
+				<p class="hideMe">X</p>
+				<div><h4></h4></div>
+				<div><h4></h4></div>
+				<div><h4></h4></div>
+				<p class="hideMe">X</p>
+				<div><h4></h4></div>
+				<div><h4></h4></div>
+				<div><h4></h4></div>
 			</div>
 			<script>
 				updateKPIs();
 				window.setInterval(function() {updateKPIs()},1000);
 			</script>
-			
-			<div class="insights row well fill" id="insights">
+			<div class="row col-lg-12 viewTarget" id="insightTarget"><hr/></div>
+			<div class="insights row text-center fill col-lg-12" id="insights">
 				<h2>Insights</h2>
+				<div></div>
+				<div></div>
+				<div></div>
 			</div>
+
 			<script>
 			updateInsights();
 			</script>
-			
-			<div class="recommendations row well fill" id="recommendations">
+			<div class="row col-lg-12 viewTarget" id="recommendationTarget"><hr align="center"/></div>
+			<div class="recommendations row fill col-lg-12" id="recommendations">
 				<h2>Recommendations</h2>
 			</div>
 			<script>
 			</script>
-			
-			<div class="campaigns row well fill" id="campaigns">
+			<div class="row col-lg-12 viewTarget" id="campaignTarget"><hr/></div>
+			<div class="campaigns row fill col-lg-12" id="campaigns">
 				<h2>Marketing Campaigns</h2>
+				<div class="progress"></div>
+				<div class="progress"></div>
+				<div class="progress"></div>
 			</div>
 			<script>
 				updateCampaigns();
 				window.setInterval(function() {updateCampaigns()},3000);
 			</script>
-			<!--
+		</div>
+	</div>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="js/jquery.min.js"></script>
+	<script src="js/jquery.scrollTo.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+</body>
+</html>
+		<!--
 		<h2 class="sub-header">Section title</h2>
           <div class="table-responsive">
             <table class="table table-striped">
@@ -327,14 +343,3 @@
             </table>
           </div>
 		  -->
-        </div>
-      </div>
-    </div>
-
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="js/jquery.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-</body>
-</html>
