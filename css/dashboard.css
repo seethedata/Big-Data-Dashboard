@@ -121,21 +121,24 @@ div.viewTarget {
 	visibility : hidden;
 }
 div#kpis {
-
+	min-height : 98%;
 }
 div#insights {
-
+	min-height : 98%;
 }	
 
 div#recommendations {
-	
+		min-height : 98%;
 }
 div#campaigns {
-	
-	
+		min-height : 98%;
+}
+
+
+.kpi {
+	margin-bottom : 2%;
 }
 .progress-bar {
-	height : 10%;
 	margin-bottom : 5%;
 }
 

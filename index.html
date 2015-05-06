@@ -27,7 +27,8 @@
     <![endif]-->
 	<script>
 		function getAvgSaleSize() {
-			return getRandomNumber(250 ,100).toLocaleString('en-US',{style : "currency",  currency : "USD", currencyDisplay : "symbol"});
+			/*return getRandomNumber(250 ,100).toLocaleString('en-US',{style : "currency",  currency : "USD", currencyDisplay : "symbol"});*/
+			return "$" + getRandomNumber(250 ,100) +".00";
 		}
 
 		function getActiveCustomerCount() {
@@ -46,88 +47,108 @@
 			var kpiData=[["Average Sale Size",getAvgSaleSize()],["Active Website Users",getActiveCustomerCount()],["Units Produced",getUnitsProduced()],
 			["More",17],["Even More", 1672],["Add One More", 72],
 			["Something Else",144],["Another Thing",10000],["Final Number",8]]	;
-			var kpiDiv=d3.select(".kpis");
-			var kpis=kpiDiv.selectAll("div")
-					.data(kpiData);
+			var kpis=d3.select(".kpis").selectAll("div").data(kpiData);
 			kpis.exit().remove();
-			kpis.enter().append("div");
+			kpis.enter()
+				.append("div")
+				.append("h4");
+			kpis.append("p")
+				.attr("class","hideMe");
 			kpis
-				.style("background-color","steelblue")
-				.style("font-size", "5em")
-				.style("text-align", "center")
-				.style("color", "white")
-				.attr("class", function (d,i) { if (i == 0) { return "col-md-offset-1 col-md-3";} else { return "col-md-3 col-md-offset-1";}})
+				.style({"background-color" : "steelblue","font-size" : "5em" ,"text-align" : "center" , "color" : "white"})
+				.attr("class", function (d,i) { if (i == 0) { return "kpi col-md-offset-1 col-md-3";} else { return "kpi col-md-3 col-md-offset-1";}})
 				.attr("id", function (d,i) {return "kpi" + i})
 				.text(function (d) {return d[1];});
-			kpis.append("h4")
-					.style("color", "white")
-					.text(function (d) {return d[0];})
-					.attr("class","lead")
-					.attr("id",function (d,i) {return "kpi" + i + "-label"});
+			kpis
+				.append("h4")
+				.style("color", "white")
+				.text(function (d) {return d[0];})
+				.attr("class","lead")
+				.attr("id",function (d,i) {return "kpi" + i + "-label"});
 		}
 		
 		function updateInsights() {
-			var insightData=[["Customer XYZ has increased spending 350%, which has placed them at the top of the \"most valued customer\" list."],
-							["Customer ABC does not seem to be spending as much as they did, down 48% from the average of the last 4 quarters."],
-							["The average increase in spend this quarter for all customers is 25%, which is 3 times higher than the normal increase at this time of year."]];
-			var insightsDiv=d3.select(".insights");
-			var insights=insightsDiv.selectAll("div")
-				.data(insightData);
+			var insightData=[
+			{"insightText" : "Customer XYZ has increased spending 350%, which has placed them at the top of the \"most valued customer\" list."},
+			{"insightText" : "Customer ABC does not seem to be spending as much as they did, down 48% from the average of the last 4 quarters."},
+			{"insightText" : "The average increase in spend this quarter for all customers is 25%, which is 3 times higher than the normal increase at this time of year."}
+			];
+			var insights=d3.selectAll(".insights").selectAll("ul").selectAll("li")
+				.data(insightData, function (d) {return d.insightText;});
+			insights.enter()
+				.append("li")
+					.attr("role", "presentation")
+					.append("a")
+						.attr("href","#");
 			insights.exit().remove();
-			insights.enter().append("div");
 			insights
-				.text(function (d) {return d[0]});
+				.style("text-align","left")
+				.text(function (d,i) {return d.insightText;});
 				
 		}
 	</script>
 	<script>
-	var campaign1=41173;
-	var campaign2=204778;
-	var campaign3=10002;
+		var campaign1=41173;
+		var campaign2=204778;
+		var campaign3=10002;
 
-	var campaign1_goal=60000;
-	var campaign2_goal=215000;
-	var campaign3_goal=40000;
+		var campaign1_goal=60000;
+		var campaign2_goal=215000;
+		var campaign3_goal=20000;
 
-	function updateCampaigns() {
-		if (campaign1 > campaign1_goal) {
-			campaign1=campaign1_goal;
-		} else {
-			campaign1= campaign1 + 60;
+		function updateCampaigns() {
+			if (campaign1 > campaign1_goal) {
+				campaign1=campaign1_goal;
+			} else {
+				campaign1= campaign1 + 60;
+			}
+			
+			if (campaign2 > campaign2_goal) {
+				campaign2 = campaign2_goal;
+			} else {
+				campaign2= campaign2 + 10;
+			}
+			
+			if (campaign3 > campaign3_goal) {
+				campaign3=campaign3_goal;
+			} else {
+				campaign3= campaign3 + 1;
+			}
+
+			var campaignData=[
+					{"campaignName" :  "All Aboard","campaignCurrentValue" : campaign1,"campaignGoal" : campaign1_goal, "campaignColor" : ""},
+					{"campaignName" : "To the Max","campaignCurrentValue" : campaign2,"campaignGoal" : campaign2_goal,"campaignColor" : "progress-bar-success"},
+					{"campaignName" : "Street Cred","campaignCurrentValue" : campaign3,"campaignGoal" : campaign3_goal,"campaignColor" : "progress-bar-danger"}
+					];
+			var campaignColors=["","progress-bar-success","progress-bar-danger"];
+			var campaigns=d3.select("#campaigns").selectAll(".progress")
+				.data(campaignData,function(d,i) {return d.campaignName;});
+				
+			campaigns.exit().remove();
+			
+			campaigns.enter()
+				.append("div")
+					.attr("class","progress")
+						.style("height", "5em")
+					.append("div")
+						.append("span")
+							.style("font-size","1.5em")
+							.style("line-height", "4em")
+			var campaign=campaigns.selectAll("div")
+				.data(campaignData,function(d,i) {return d.campaignName;});
+			
+			campaign
+					.style("width",function (d) {return  d.campaignCurrentValue*100/d.campaignGoal + "%"; })
+					.attr("class",function (d,i) { return "progress-bar " + d.campaignColor + " progress-bar-striped" })
+					.attr("role","progressbar")
+					.attr("aria-valuenow",function (d) { return d.campaignCurrentValue*100/d.campaignGoal;})
+					.attr("aria-valuemin",0)
+					.attr("aria-valuemax",100)
+
+				.selectAll("span")
+					.data(campaignData,function(d,i) {return d.campaignName;})
+					.text(function(d) {return d.campaignName + " - " + "$" +  d.campaignCurrentValue + ".00"});
 		}
-		
-		if (campaign2 > campaign2_goal) {
-			campaign2 = campaign2_goal;
-		} else {
-			campaign2= campaign2 + 10;
-		}
-		
-		if (campaign3 > campaign3_goal) {
-			campaign3=campaign3_goal;
-		} else {
-			campaign3= campaign3 + 1;
-		}
-
-		
-		var campaignData=[["All Aboard",campaign1,campaign1_goal],["To the Max",campaign2,campaign2_goal],["Street Cred",campaign3,campaign3_goal]]
-		var campaignColors=["","progress-bar-success","progress-bar-danger"];
-		
-		/*var campaignDiv=d3.selectAll(".campaigns");
-		var campaigns=campaignDiv.selectAll(".progress");
-		campaigns.enter().append("div")
-				.data(campaignData)
-			.attr("class",function (d,i) { return "progress-bar " + campaignColors[i] + " progress-bar-striped" })
-			.attr("role","progressbar")
-			.attr("aria-valuenow",function (d) { return d[1]*100/d[2];})
-			.attr("aria-valuemin",0)
-			.attr("aria-valuemax",100)
-			.attr("style",function (d,i) { return "width: " + d[1]*100/d[2] + "%" })
-			.append("span")
-			.style("text-align", "left")
-			.text(function(d,i) {return d[0] + " - " + d[1].toLocaleString('en-US',{style : "currency",  currency : "USD", currencyDisplay : "symbol"})});
-			*/
-	}
-
 	</script>
   </head>
 
@@ -155,20 +176,8 @@
     </nav>
 
 	<div class="container-fluid fill">
-		<div class="row fill">
-			<div class="kpis row fill text-center col-lg-12" id="kpis">
+			<div class="kpis row  text-center col-lg-12" id="kpis">
 				<h2>Key Performance Indicators</h2>
-				<div><h4></h4></div>
-				<div><h4></h4></div>
-				<div><h4></h4></div>
-				<p class="hideMe">X</p>
-				<div><h4></h4></div>
-				<div><h4></h4></div>
-				<div><h4></h4></div>
-				<p class="hideMe">X</p>
-				<div><h4></h4></div>
-				<div><h4></h4></div>
-				<div><h4></h4></div>
 			</div>
 			<script>
 				updateKPIs();
@@ -180,13 +189,11 @@
 				<hr/>
 			</div>
 			
-			<div class="insights row text-center fill col-lg-12" id="insights">
+			<div class="insights row text-center col-lg-12" id="insights">
 				<h2>Insights</h2>
-				<div></div>
-				<div></div>
-				<div></div>
+				<ul class="">
+				</ul>
 			</div>
-
 			<script>
 			updateInsights();
 			</script>
@@ -194,7 +201,7 @@
 				<span class="glyphicon glyphicon-chevron-down down-button" aria-hidden="true" onClick="$.scrollTo('#recommendationTarget',800);"></span>
 				<hr/>
 			</div>
-			<div class="recommendations row fill col-lg-12" id="recommendations">
+			<div class="recommendations row col-lg-12 text-center" id="recommendations">
 				<h2>Recommendations</h2>
 			</div>
 			<script>
@@ -203,17 +210,17 @@
 				<span class="glyphicon glyphicon-chevron-down down-button" aria-hidden="true" onClick="$.scrollTo('#campaignTarget',800);"></span>
 				<hr/>
 			</div>
-			<div class="campaigns row fill col-lg-12" id="campaigns">
+			<div class="campaigns row col-lg-12 text-center" id="campaigns">
 				<h2>Marketing Campaigns</h2>
-				<div class="progress"></div>
-				<div class="progress"></div>
-				<div class="progress"></div>
 			</div>
 			<script>
 				updateCampaigns();
 				window.setInterval(function() {updateCampaigns()},3000);
 			</script>
-		</div>
+			<div class="row col-lg-12 viewTarget text-center" id="bottom">
+				<span class="glyphicon glyphicon-chevron-up down-button" aria-hidden="true" onClick="$.scrollTo('#top',800);"></span>
+			</div>
+
 	</div>
 
     <!-- Bootstrap core JavaScript
