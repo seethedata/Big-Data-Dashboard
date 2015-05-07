@@ -69,9 +69,53 @@
 		
 		function updateInsights() {
 			var insightData=[
-			{"insightText" : "Customer XYZ has increased spending 350%, which has placed them at the top of the \"most valued customer\" list."},
-			{"insightText" : "Customer ABC does not seem to be spending as much as they did, down 48% from the average of the last 4 quarters."},
-			{"insightText" : "The average increase in spend this quarter for all customers is 25%, which is 3 times higher than the normal increase at this time of year."}
+			{"insightText" : "Customer XYZ has increased spending 350%, which has placed them at the top of the \"most valued customer\" list.",
+				"insightData" : "<div class='detail'>" +
+					"<h4>Customer XYZ</h4>" +
+					"<table border=1>" +
+						"<tr><th>Quarter</th><th>Spend</th></tr>" +
+						"<tr><td>Q3 2014</td><td>$340.00</td></tr>" +
+						"<tr><td>Q4 2014</td><td>$1,190.00</td></tr>" +
+					"</table>" +
+					"<div class='reasons'>" +
+						"<ul>" +
+							"<li>Customer XYZ's Influence Quotient has increased by 19 points.</li>" +
+						"</ul>" +
+					"</div>" +
+					"<table border=1>" +
+						"<tr><th>Customer</th><th>Influence Quotient</th></tr>" +
+						"<tr><td>Customer XYZ</td><td>179</td></tr>" +
+						"<tr><td>Customer QRS</td><td>111</td></tr>" +
+						"<tr><td>Customer ABC</td><td>66</td></tr>" +
+					"</table>" +
+					"</div>"},
+			{"insightText" : "Customer ABC does not seem to be spending as much as they did, down 48% from the average of the last 4 quarters.",
+				"insightData" : "<div class='detail'>" +
+					"<h4>Customer ABC</h4>" +
+					"<table border=1>" +
+					"<tr><th>Quarter</th><th>Spend</th></tr>" +
+					"<tr><td>Q4 2013</td><td>$780.00</td></tr>" +
+					"<tr><td>Q1 2014</td><td>$620.00</td></tr>" +
+					"<tr><td>Q2 2014</td><td>$670.00</td></tr>" +
+					"<tr><td>Q3 2014</td><td>$650.00</td></tr>" +
+					"<tr><td>Q4 2014</td><td>$351.00</td></tr>" +
+					"</table> " +
+					"<div class='graph'><img src='images/graph1.png'/></div>" +
+				"</div>"
+				},
+			{"insightText" : "The average increase in spend this quarter for all customers is 25%, which is 3 times higher than the normal increase at this time of year.",
+				"insightData" : "<div class='detail'>" +
+				"<h4>Customer Average Spend</h4>" +
+				"<table border=1>" +
+					"<tr><th>Quarter</th><th>Spend</th></tr>" +
+					"<tr><td>Average Q3</td><td>$147.00</td></tr>" +
+					"<tr><td>Average Q4</td><td>$159.25</td></tr>" +
+					"<tr><td>Q3 2014</td><td>$150.00</td></tr>" +
+					"<tr><td>Q4 2014</td><td>$187.00</td></tr>" +
+				"</table>" +
+				"<div class='graph'><img src='images/graph2.png'/></div>" +
+				"</div>"
+			}
 			];
 			var insights=d3.selectAll(".insights").selectAll("ul").selectAll("li")
 				.data(insightData, function (d) {return d.insightText;});
@@ -79,12 +123,12 @@
 				.append("li")
 					.attr("role", "presentation")
 					.style("text-align","left")
-					.style("width","30%")
+					.attr("class",function(d,i) {if (i ==0) { loadInsightDetail(d.insightData);return "active";} else {return "";}})
+					.on("click",function(d) {  insights.attr("class",""); d3.select(this).attr("class","active");})
 					.append("a")
-						.on("click",function (d,i) { loadInsightDetail(i); });
+						.on("click",function (d,i) { loadInsightDetail(d.insightData); });
 			insights.exit().remove();
 			insights
-				.attr("class",function (d,i) {if (i == 0 ) { return "active"; } else {return "";}})
 				.selectAll("a")
 				.text(function (d,i) {return d.insightText;});		
 		}
@@ -96,10 +140,9 @@
 		function unhighlight(object) {
 			object.class="";
 		}
-		function loadInsightDetail(divIndex) {
+		function loadInsightDetail(data) {
 			var insightDiv=document.getElementById("insightDetail");
-			insightDiv.innerHTML="<div>Hello " + divIndex + "</div>";
-			insightDiv.class="active";
+			insightDiv.innerHTML=data;
 		}
 	</script>
 	<script>
@@ -206,7 +249,7 @@
 			
 			<div class="insights row text-center col-lg-12" id="insights">
 				<h2>Insights</h2>
-				<ul class="nav nav-pills nav-stacked">
+				<ul class="nav nav-pills nav-stacked" style="width : 30%;float: left;padding-right : 2%">
 				</ul>
 				<div class="insightDetail" id="insightDetail"></div>
 			</div>
