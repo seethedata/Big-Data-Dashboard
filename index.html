@@ -28,25 +28,39 @@
 	<script>
 		function getAvgSaleSize() {
 			/*return getRandomNumber(250 ,100).toLocaleString('en-US',{style : "currency",  currency : "USD", currencyDisplay : "symbol"});*/
-			return "$" + getRandomNumber(250 ,100) +".00";
+			return "$" + Math.round(getRandomNumber(250 ,100)) +".00";
 		}
 
 		function getActiveCustomerCount() {
-			return  getRandomNumber(2000 ,1000);
+			return  Math.round(getRandomNumber(2000 ,1000));
 		}
 
 		function getUnitsProduced() {
-			return getRandomNumber(82,10);
+			return Math.round(getRandomNumber(82,10));
 		}
 
+		function getCountHighInfluencers() {
+			return Math.round(getRandomNumber(10,1));
+		}
+		function getAvgCSAT() {
+			return getRandomNumber(90.2, 1).toPrecision(4);
+		}
 		function getRandomNumber(base, multiplier) {
-			return base + Math.round(Math.random()*multiplier);
+			return  base + (Math.random()*multiplier);
 		}
 
 		function updateKPIs() {
-			var kpiData=[["Average Sale Size",getAvgSaleSize()],["Active Website Users",getActiveCustomerCount()],["Units Produced",getUnitsProduced()],
-			["More",17],["Even More", 1672],["Add One More", 72],
-			["Something Else",144],["Another Thing",10000],["Final Number",8]]	;
+			var kpiData=[
+							["Average Sale Size",getAvgSaleSize()],
+							["Active Website Users",getActiveCustomerCount()],
+							["Units Produced",getUnitsProduced()],
+							["# of High Influencers",getCountHighInfluencers()],
+							["Average CSAT Score", getAvgCSAT()],
+							["Add One More", 72],
+							["Something Else",144],
+							["Another Thing",10000],
+							["Final Number",8]
+						];
 			var kpis=d3.select(".kpis").selectAll("div").data(kpiData);
 			kpis.exit().remove();
 			kpis.enter()
@@ -224,10 +238,11 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
-            <li><a onClick="$.scrollTo('#top',800);">Key Performance Indicators</a></li>
-            <li><a onClick="$.scrollTo('#insightTarget',800);">Insights</a></li>
-            <li><a onClick="$.scrollTo('#recommendationTarget',800);">Recommendations</a></li>
-            <li><a onClick="$.scrollTo('#campaignTarget',800);">Campaigns</a></li>
+            <li><a onClick="$.scrollTo('#top',800);"><span class="glyphicon glyphicon glyphicon-dashboard nav-glyph" aria-hidden="true"></span>Key Performance Indicators</a></li>
+            <li><a onClick="$.scrollTo('#insightTarget',800);"><span class="glyphicon glyphicon glyphicon-info-sign nav-glyph" aria-hidden="true"></span>Insights</a></li>
+            <li><a onClick="$.scrollTo('#recommendationTarget',800);"><span class="glyphicon glyphicon-ok-circle nav-glyph" aria-hidden="true"></span>Recommendations</a></li>
+            <li><a onClick="$.scrollTo('#campaignTarget',800);"><span class="glyphicon glyphicon glyphicon-globe nav-glyph" aria-hidden="true"></span>Campaigns</a></li>
+			
           </ul>
         </div>
       </div>
