@@ -45,6 +45,22 @@
 		function getAvgCSAT() {
 			return getRandomNumber(90.2, 1).toPrecision(4);
 		}
+		function getTwitterFollowers() {
+			return Math.round(getRandomNumber(485, 1));
+		}
+		
+		function getNPS () {
+			return getRandomNumber(97, 1).toPrecision(3);
+		}
+		
+		function getCustomerCalls() {
+			return getRandomNumber(12, 1).toPrecision(3);
+		}
+		
+		function getAvgCustomerCallLength() {
+			return getRandomNumber(23, 1).toPrecision(3) + " min";
+		}
+		
 		function getRandomNumber(base, multiplier) {
 			return  base + (Math.random()*multiplier);
 		}
@@ -56,10 +72,10 @@
 							["Units Produced",getUnitsProduced()],
 							["# of High Influencers",getCountHighInfluencers()],
 							["Average CSAT Score", getAvgCSAT()],
-							["Add One More", 72],
-							["Something Else",144],
-							["Another Thing",10000],
-							["Final Number",8]
+							["Twitter Followers", getTwitterFollowers()],
+							["Net Promoter Score",getNPS()],
+							["Customer Calls / hour",getCustomerCalls()],
+							["Cust. Service - Avg. Resolution Time",getAvgCustomerCallLength()]
 						];
 			var kpis=d3.select(".kpis").selectAll("div").data(kpiData);
 			kpis.exit().remove();
