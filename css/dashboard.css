@@ -177,3 +177,8 @@ hr {
 	top : -5px;
 	background-color : red;
 }
+
+#insightDetail {
+	border : solid;
+	border-color : #337ab7;
+}
