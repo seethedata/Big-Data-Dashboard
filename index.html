@@ -100,50 +100,51 @@
 		function updateInsights() {
 			var insightData=[
 			{"insightText" : "Customer XYZ has increased spending 350%, which has placed them at the top of the \"most valued customer\" list.",
-				"insightData" : "<div class='detail'>" +
+				"insightData" : "<div class='detail well'>" +
 					"<h4>Customer XYZ</h4>" +
-					"<table border=1>" +
-						"<tr><th>Quarter</th><th>Spend</th></tr>" +
+					"<table class='table table-bordered'>" +
+						"<thead><tr><th>Quarter</th><th>Spend</th></tr></thead>" +
+						"<tbody>"+
 						"<tr><td>Q3 2014</td><td>$340.00</td></tr>" +
 						"<tr><td>Q4 2014</td><td>$1,190.00</td></tr>" +
+						"</tbody>"+
 					"</table>" +
-					"<div class='reasons'>" +
-						"<ul>" +
-							"<li>Customer XYZ's Influence Quotient has increased by 19 points.</li>" +
-						"</ul>" +
-					"</div>" +
-					"<table border=1>" +
-						"<tr><th>Customer</th><th>Influence Quotient</th></tr>" +
+					"<table class='table table-bordered'>" +
+						"<thead><tr><th>Customer</th><th>Influence Quotient</th></tr></thead>" +
+						"<tbody>"+
 						"<tr><td>Customer XYZ</td><td>179</td></tr>" +
 						"<tr><td>Customer QRS</td><td>111</td></tr>" +
 						"<tr><td>Customer ABC</td><td>66</td></tr>" +
+						"</tbody>"+
 					"</table>" +
 					"</div>"},
 			{"insightText" : "Customer ABC does not seem to be spending as much as they did, down 48% from the average of the last 4 quarters.",
-				"insightData" : "<div class='detail'>" +
+				"insightData" : "<div class='detail well'>" +
 					"<h4>Customer ABC</h4>" +
-					"<table border=1>" +
-					"<tr><th>Quarter</th><th>Spend</th></tr>" +
+					"<table class='table table-bordered'>" +
+					"<thead><tr><th>Quarter</th><th>Spend</th></tr></thead>" +
+					"<tbody>"+
 					"<tr><td>Q4 2013</td><td>$780.00</td></tr>" +
 					"<tr><td>Q1 2014</td><td>$620.00</td></tr>" +
 					"<tr><td>Q2 2014</td><td>$670.00</td></tr>" +
 					"<tr><td>Q3 2014</td><td>$650.00</td></tr>" +
 					"<tr><td>Q4 2014</td><td>$351.00</td></tr>" +
+					"</tbody>" +
 					"</table> " +
-					"<div class='graph'><img src='images/graph1.png'/></div>" +
 				"</div>"
 				},
 			{"insightText" : "The average increase in spend this quarter for all customers is 25%, which is 3 times higher than the normal increase at this time of year.",
-				"insightData" : "<div class='detail'>" +
+				"insightData" : "<div class='detail well'>" +
 				"<h4>Customer Average Spend</h4>" +
-				"<table border=1>" +
-					"<tr><th>Quarter</th><th>Spend</th></tr>" +
+				"<table class='table table-bordered'>" +
+					"<thead><tr><th>Quarter</th><th>Spend</th></tr></thead>" +
+					"<tbody>"+
 					"<tr><td>Average Q3</td><td>$147.00</td></tr>" +
 					"<tr><td>Average Q4</td><td>$159.25</td></tr>" +
 					"<tr><td>Q3 2014</td><td>$150.00</td></tr>" +
 					"<tr><td>Q4 2014</td><td>$187.00</td></tr>" +
+					"</tbody>"+
 				"</table>" +
-				"<div class='graph'><img src='images/graph2.png'/></div>" +
 				"</div>"
 			}
 			];
@@ -161,6 +162,7 @@
 			insights
 				.selectAll("a")
 				.text(function (d,i) {return d.insightText;});		
+			document.getElementById("insightBadge").innerHTML=insightData.length;
 		}
 		
 		function highlight(object) {
@@ -174,6 +176,16 @@
 			var insightDiv=document.getElementById("insightDetail");
 			insightDiv.innerHTML=data;
 		}
+	</script>
+	<script>
+	function updateRecommendations() {
+		var recommendationData= [
+			{"recommdationText" : "Target Customer XYZ is predicted to be a strong influencer. Contact Customer XYZ's Facebook circle and offer 10% discounted rates."},
+			{"recommdationText" : "Customer ABC is predicted to be considering leaving. Contact Customer ABC and offer free upgrade to Enhanced Package."},
+			{"recommdationText" : "Target Customer ABC is predicted to be considering leaving. Contact Customer ABC's Facebook circle and offer free upgrade to Enhanced Package."}
+		];
+		document.getElementById("recommendationBadge").innerHTML=recommendationData.length;
+	}
 	</script>
 	<script>
 		var campaign1=41173;
@@ -255,8 +267,8 @@
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
             <li><a onClick="$.scrollTo('#top',800);"><span class="glyphicon glyphicon glyphicon-dashboard nav-glyph" aria-hidden="true"></span>Key Performance Indicators</a></li>
-            <li><a onClick="$.scrollTo('#insightTarget',800);"><span class="glyphicon glyphicon glyphicon-info-sign nav-glyph" aria-hidden="true"></span>Insights</a></li>
-            <li><a onClick="$.scrollTo('#recommendationTarget',800);"><span class="glyphicon glyphicon-ok-circle nav-glyph" aria-hidden="true"></span>Recommendations</a></li>
+            <li><a onClick="$.scrollTo('#insightTarget',800);"><span class="glyphicon glyphicon glyphicon-info-sign nav-glyph" aria-hidden="true"></span>Insights<span class="badge nav-badge" id="insightBadge"></span></a></li>
+            <li><a onClick="$.scrollTo('#recommendationTarget',800);"><span class="glyphicon glyphicon-ok-circle nav-glyph" aria-hidden="true"></span>Recommendations<span class="badge nav-badge" id="recommendationBadge"></span></a></li>
             <li><a onClick="$.scrollTo('#campaignTarget',800);"><span class="glyphicon glyphicon glyphicon-globe nav-glyph" aria-hidden="true"></span>Campaigns</a></li>
 			
           </ul>
@@ -280,12 +292,12 @@
 			
 			<div class="insights row text-center col-lg-12" id="insights">
 				<h2>Insights</h2>
-				<ul class="nav nav-pills nav-stacked" style="width : 30%;float: left;padding-right : 2%">
+				<ul class="nav nav-pills nav-stacked col-xs-3">
 				</ul>
-				<div class="insightDetail" id="insightDetail"></div>
+				<div class="insightDetail col-xs-9" id="insightDetail"></div>
 			</div>
 			<script>
-			updateInsights();
+				updateInsights();
 			</script>
 			<div class="row col-lg-12 viewTarget text-center" id="recommendationTarget">
 				<span class="glyphicon glyphicon-chevron-down down-button" aria-hidden="true" onClick="$.scrollTo('#recommendationTarget',800);"></span>
@@ -295,6 +307,7 @@
 				<h2>Recommendations</h2>
 			</div>
 			<script>
+				updateRecommendations();
 			</script>
 			<div class="row col-lg-12 viewTarget text-center" id="campaignTarget">
 				<span class="glyphicon glyphicon-chevron-down down-button" aria-hidden="true" onClick="$.scrollTo('#campaignTarget',800);"></span>
