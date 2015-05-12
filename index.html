@@ -180,10 +180,18 @@
 	<script>
 	function updateRecommendations() {
 		var recommendationData= [
-			{"recommdationText" : "Target Customer XYZ is predicted to be a strong influencer. Contact Customer XYZ's Facebook circle and offer 10% discounted rates."},
-			{"recommdationText" : "Customer ABC is predicted to be considering leaving. Contact Customer ABC and offer free upgrade to Enhanced Package."},
-			{"recommdationText" : "Target Customer ABC is predicted to be considering leaving. Contact Customer ABC's Facebook circle and offer free upgrade to Enhanced Package."}
+			{"recommendationText" : "Target Customer XYZ is predicted to be a strong influencer. Contact Customer XYZ's Facebook circle and offer 10% discounted rates."},
+			{"recommendationText" : "Customer ABC is predicted to be considering leaving. Contact Customer ABC and offer free upgrade to Enhanced Package."},
+			{"recommendationText" : "Target Customer ABC is predicted to be considering leaving. Contact Customer ABC's Facebook circle and offer free upgrade to Enhanced Package."}
 		];
+		var recommendations=d3.selectAll("#recommendations").selectAll("div")
+				.data(recommendationData);
+		recommendations.enter()
+				.append("div")	
+					.attr("class", "recommendation");
+		recommendations.exit().remove();
+		recommendations
+				.text(function (d) {return d.recommendationText;});		
 		document.getElementById("recommendationBadge").innerHTML=recommendationData.length;
 	}
 	</script>
