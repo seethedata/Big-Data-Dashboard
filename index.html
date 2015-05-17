@@ -189,13 +189,22 @@
 				
 		recommendations.enter()
 				.append("div")
-				.attr("class", "recommendation panel panel-primary col-md-4")
+				.attr("class", function (d,i) { if (i == 0) { return "recommendation panel panel-primary  col-lg-offset-1 col-lg-4";} else { return "recommendation panel panel-primary  col-lg-4 col-lg-offset-1";}})
 				.each(function(d,i) {
 					d3.select(this).append("div")
-						.attr("class", "panel-heading").text(d.recommendationText)
+						.attr("class", "panel-heading")
+						.attr("data-toggle","collapse")
+						.attr("data-target","#recommendationDetail" + i)
+						.append("div")
+							.text(d.recommendationText);
 					d3.select(this).append("div")
-						.attr("class","panel-body")
-						.text("Detailed Info for recommendation " + i + ".")
+						.attr("class","panel-body");
+					d3.select(this).select(".panel-body")
+						.append("div")
+							.attr("id","recommendationDetail" + i)
+							.text("Detailed Info for recommendation " + i + ".")
+							.attr("class","collapse");
+					d3.select(this).select(".panel-body")
 						.append("div")
 						.attr("id","button-recommendation" + i)
 						.each(function (d) {
