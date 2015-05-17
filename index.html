@@ -184,14 +184,41 @@
 			{"recommendationText" : "Customer ABC is predicted to be considering leaving. Contact Customer ABC and offer free upgrade to Enhanced Package."},
 			{"recommendationText" : "Target Customer ABC is predicted to be considering leaving. Contact Customer ABC's Facebook circle and offer free upgrade to Enhanced Package."}
 		];
-		var recommendations=d3.selectAll("#recommendations").selectAll("div")
+		var recommendations=d3.select("#recommendations").selectAll("div")
 				.data(recommendationData);
+				
 		recommendations.enter()
-				.append("div")	
-					.attr("class", "recommendation");
+				.append("div")
+				.attr("class", "recommendation panel panel-primary col-md-4")
+				.each(function(d,i) {
+					d3.select(this).append("div")
+						.attr("class", "panel-heading").text(d.recommendationText)
+					d3.select(this).append("div")
+						.attr("class","panel-body")
+						.text("Detailed Info for recommendation " + i + ".")
+						.append("div")
+						.attr("id","button-recommendation" + i)
+						.each(function (d) {
+							d3.select(this).append("button")
+								.attr("class","button btn btn-default")
+								.text(" Accept")
+								.insert("span")
+								.attr("class","glyphicon glyphicon-ok");
+							d3.select(this).insert("button")
+								.attr("class","button btn btn-default")
+								.text(" Reject")
+								.append("span")
+									.attr("class","glyphicon glyphicon-remove");
+							d3.select(this).insert("button")
+								.attr("class","button btn btn-default")
+								.text(" History")
+								.append("span")
+									.attr("class","glyphicon glyphicon-list-alt");
+							});
+					});
+					
 		recommendations.exit().remove();
-		recommendations
-				.text(function (d) {return d.recommendationText;});		
+	
 		document.getElementById("recommendationBadge").innerHTML=recommendationData.length;
 	}
 	</script>
@@ -260,7 +287,7 @@
 	</script>
   </head>
 
-  <body class="fill" id="top">
+  <body id="top">
     <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container-fluid">
         <div class="navbar-header">
@@ -274,17 +301,17 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
-            <li><a onClick="$.scrollTo('#top',800);"><span class="glyphicon glyphicon glyphicon-dashboard nav-glyph" aria-hidden="true"></span>Key Performance Indicators</a></li>
-            <li><a onClick="$.scrollTo('#insightTarget',800);"><span class="glyphicon glyphicon glyphicon-info-sign nav-glyph" aria-hidden="true"></span>Insights<span class="badge nav-badge" id="insightBadge"></span></a></li>
-            <li><a onClick="$.scrollTo('#recommendationTarget',800);"><span class="glyphicon glyphicon-ok-circle nav-glyph" aria-hidden="true"></span>Recommendations<span class="badge nav-badge" id="recommendationBadge"></span></a></li>
-            <li><a onClick="$.scrollTo('#campaignTarget',800);"><span class="glyphicon glyphicon glyphicon-globe nav-glyph" aria-hidden="true"></span>Campaigns</a></li>
+            <li><a onClick="$.scrollTo('#top',800);"><span class="glyphicon glyphicon glyphicon-dashboard nav-glyph" aria-hidden="true"></span> Key Performance Indicators</a></li>
+            <li><a onClick="$.scrollTo('#insightTarget',800);"><span class="glyphicon glyphicon glyphicon-info-sign nav-glyph" aria-hidden="true"></span> Insights<span class="badge nav-badge" id="insightBadge"></span></a></li>
+            <li><a onClick="$.scrollTo('#recommendationTarget',800);"><span class="glyphicon glyphicon-ok-circle nav-glyph" aria-hidden="true"></span> Recommendations<span class="badge nav-badge" id="recommendationBadge"></span></a></li>
+            <li><a onClick="$.scrollTo('#campaignTarget',800);"><span class="glyphicon glyphicon glyphicon-globe nav-glyph" aria-hidden="true"></span> Campaigns</a></li>
 			
           </ul>
         </div>
       </div>
     </nav>
 
-	<div class="container-fluid fill">
+	<div class="container-fluid">
 			<div class="kpis row  text-center col-lg-12" id="kpis">
 				<h2>Key Performance Indicators</h2>
 			</div>

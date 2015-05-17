@@ -1,0 +1,51 @@
+<html>
+<head>
+<script src="js/jquery.min.js"></script>
+<script src="js/d3.min.js"></script>
+</head>
+<body>
+<svg id="visualization" width="1000" height="500"></svg>
+<script>
+var saleData=[ {"x" : 100, "y": 357},	{"x": 200, "y": 400},	{"x": 300, "y" :220},	{"x": 400, "y": 225}	];
+
+var vis = d3.select('#visualization');
+	vis
+		.attr("width",960)
+		.attr("height",500)
+		.append("g")
+			.attr("fill", "none")
+			.attr("stroke","black")
+			.attr("stroke-width","3")
+			.append("line")
+				.attr("x1",0)
+				.attr("y1",500)
+				.attr("x2",500)
+				.attr("y2",500);
+	vis
+		.append("g")
+			.attr("fill", "none")
+			.attr("stroke","black")
+			.attr("stroke-width","3")
+			.append("line")
+				.attr("x1",0)
+				.attr("y1",0)
+				.attr("x2",0)
+				.attr("y2",500);
+	var pathData=d3.svg.line().x(function (d) {return d.x;}).y(function (d) {return d.y;}).interpolate("linear");
+	vis	
+		.append("g")
+			.append("path")
+				.attr("fill","none")
+				.attr("stroke", "blue")
+				.attr("stroke-width", 2)
+				.attr("d",pathData(saleData));
+	   
+ function addData() {
+	saleData.push({x:5,y:380});
+	alert(saleData.length);
+ }
+</script>
+<p/>
+<button onClick="addData();">Add Data</button>
+</body>
+</html>
