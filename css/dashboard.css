@@ -186,3 +186,7 @@ hr {
 padding-left : 0px;
 padding-right : 0px;
 }
+
+th {
+	text-align : center
+}
