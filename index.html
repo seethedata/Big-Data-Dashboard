@@ -158,9 +158,13 @@
 				.each(function(d,i) {
 					d3.select(this).append("div").attr("class", "panel-heading pointer-div")
 						.attr("data-toggle","collapse")
-						.attr("data-target","#insightDetail" + i)
-						.append("div")
-							.text(d.insightText);
+						.attr("data-target","#insightDetail" + i);
+					d3.select(this).select(".panel-heading")
+						.append("span")
+							.attr("class","glyphicon glyphicon-triangle-right");
+					d3.select(this).select(".panel-heading")
+						.append("span")
+								.text(d.insightText);
 					d3.select(this).append("div")
 						.attr("class","panel-body");
 					d3.select(this).select(".panel-body")
@@ -191,7 +195,43 @@
 							"<li>10% discount is predicted to have 87% efficacy rate due to Customer XYZ's influence.</li>"+
 						"</ul>"+
 					"</div>" ,
-			"recommendationAccept" : "Accepted. 10% discount rates sent."},
+			"recommendationAccept" : "Accepted. 10% discount rates sent.",
+			"recommendationHistory" : "<table class='table'>" +
+						"<thead>"+
+						"<tr>"+
+							"<th>Date</th>"+
+							"<th>Recommendation</th>"+
+							"<th>Prediction</th>"+
+							"<th>Result</th>"+
+						"</tr>"+
+						"</thead>"+
+						"<tbody"+
+						"<tr>"+
+							"<td>10/15/2014</td>"+
+							"<td>10% Discount Offer</td>"+
+							"<td>89% efficacy</td>"+
+							"<td>Customer value increased $2700.00.</td>"+		
+						"</tr>"+
+						"<tr>"+
+							"<td>10/26/2014</td>"+
+							"<td>10% Discount Offer</td>"+
+							"<td>65% efficacy</td>"+
+							"<td>Customer value increased $250.00.</td>"+
+						"</tr>"+
+						"<tr>"+
+							"<td>11/03/2014</td>"+
+							"<td>10% Discount Offer</td>"+
+							"<td>81% efficacy</td>"+
+							"<td>Customer value increased $1100.00.</td>"+
+						"</tr>"+
+						"<tr>"+
+							"<td>12/17/2014</td>"+
+							"<td>10% Discount Offer</td>"+
+							"<td>85% efficacy</td>"+
+							"<td>Customer value increased $2500.00.</td>"+
+						"</tr>"+
+						"</tbody>"+
+					"</table>"},
 			{"recommendationText" : "Customer ABC is predicted to be considering leaving. Contact Customer ABC and offer free upgrade to Enhanced Package.",
 			"recommendationData" : "<h4>Customer ABC</h4>"+
 						"<table class='table'>"+
@@ -205,7 +245,43 @@
 								"<li>Enhanced Package Offer rate is predicted to increase customer satisfaction ranking by 35%.</li>"+
 							"</ul>"+
 						"</div>",
-			"recommendationAccept" : "Accepted. Upgrade package offer sent to Customer ABC."},
+			"recommendationAccept" : "Accepted. Upgrade package offer sent to Customer ABC.",
+			"recommendationHistory" : "<table class='table'>"+
+							"<thead>"+
+							"<tr>"+
+								"<th>Date</th>"+
+								"<th>Recommendation</th>"+
+								"<th>Prediction</th>"+
+								"<th>Result</th>"+
+							"</tr>"+
+							"</thead>"+
+							"<tbody>"+
+							"<tr>"+
+								"<td>10/15/2014</td>"+
+								"<td>Enhanced Offer to Customer</td>"+
+								"<td>89% efficacy</td>"+
+								"<td>Customer value increased $2700.00.</td>"+		
+							"</tr>"+
+							"<tr>"+
+								"<td>10/26/2014</td>"+
+								"<td>Enhanced Offer to Customer</td>"+
+								"<td>65% efficacy</td>"+
+								"<td>Customer value increased $250.00.</td>"+
+							"</tr>"+
+							"<tr>"+
+								"<td>11/03/2014</td>"+
+								"<td>Enhanced Offer to Customer</td>"+
+								"<td>81% efficacy</td>"+
+								"<td>Customer value increased $1100.00.</td>"+
+							"</tr>"+
+							"<tr>"+
+								"<td>12/17/2014</td>"+
+								"<td>Enhanced Offer to Customer</td>"+
+								"<td>85% efficacy</td>"+
+								"<td>Customer value increased $2500.00.</td>"+
+							"</tr>"+
+							"</tbody>"+
+						"</table>"},
 			{"recommendationText" : "Target Customer ABC is predicted to be considering leaving. Contact Customer ABC's Facebook circle and offer free upgrade to Enhanced Package.",
 			"recommendationData" : "<h4>Customer ABC</h4>"+
 						"<table class='table'>"+
@@ -219,9 +295,45 @@
 								"<li>Enhanced Package Offer has 50% predicted chance to increase customer satisfaction ranking by 35%.</li>"+
 							"</ul>"+
 						"</div>",
-			"recommendationAccept" : "Accepted. Upgrade packages offers sent."}
+			"recommendationAccept" : "Accepted. Upgrade packages offers sent.",
+			"recommendationHistory" : "<table class='table'>"+
+							"<thead>"+
+							"<tr>"+
+								"<th>Date</th>"+
+								"<th>Recommendation</th>"+
+								"<th>Prediction</th>"+
+								"<th>Result</th>"+
+							"</tr>"+
+							"</thead>"+
+							"<tbody>"+
+							"<tr>"+
+								"<td>10/15/2014</td>"+
+								"<td>Enhanced Offer to Related Customer</td>"+
+								"<td>65% efficacy</td>"+
+								"<td>No change.</td>"+		
+							"</tr>"+
+							"<tr>"+
+								"<td>10/26/2014</td>"+
+								"<td>Enhanced Offer to Related Customer</td>"+
+								"<td>58% efficacy</td>"+
+								"<td>Customer value increased $20.00.</td>"+
+							"</tr>"+
+							"<tr>"+
+								"<td>11/03/2014</td>"+
+								"<td>Enhanced Offer to Related Customer</td>"+
+								"<td>51% efficacy</td>"+
+								"<td>Customer value increased $11.00</td>"+
+							"</tr>"+
+							"<tr>"+
+								"<td>12/17/2014</td>"+
+								"<td>Enhanced Offer to Related Customer</td>"+
+								"<td>50% efficacy</td>"+
+								"<td>No Change.</td>"+
+							"</tr>"+
+							"</tbody>"+
+						"</table>"}
 		];
-		var recommendations=d3.select("#recommendations").selectAll("div")
+		var recommendations=d3.select("#recommendations").selectAll(".recommendation")
 				.data(recommendationData);
 				
 		recommendations.enter()
@@ -231,7 +343,10 @@
 					d3.select(this).append("div").attr("class", "panel-heading pointer-div")
 						.attr("data-toggle","collapse")
 						.attr("data-target","#recommendationDetail" + i)
-						.append("div")
+						.append("span")
+							.attr("class","glyphicon glyphicon-triangle-right");
+					d3.select(this).select(".panel-heading")
+						.append("span")
 							.text(d.recommendationText);
 					d3.select(this).append("div")
 						.attr("class","panel-body");
@@ -253,11 +368,15 @@
 								.attr("class","glyphicon glyphicon-ok");
 							d3.select(this).insert("button")
 								.attr("class","button btn btn-default")
+								.on("click",function (d){rejectAction(this);})
 								.text(" Reject")
 								.append("span")
 									.attr("class","glyphicon glyphicon-remove");
 							d3.select(this).insert("button")
 								.attr("class","button btn btn-default")
+								.attr("data-toggle","modal")
+								.attr("data-target","#recommendationModal")
+								.on("click",function (d){historyAction(d.recommendationHistory);})
 								.text(" History")
 								.append("span")
 									.attr("class","glyphicon glyphicon-list-alt");
@@ -270,49 +389,43 @@
 	}
 	
 	function acceptAction(message,button) {
-	alert(message);
-	button.style.background="green"; 
-	/*
-		t.innerHTML=currentTable.replace("</tbody>","<tr><td>" + getPrintDate().replace(/ .*-/,"") + "</td><td>10% Discount Offer</td><td>87% efficacy</td><td>Result Pending</td></tr></tbody>");
-		t.innerHTML=currentTable.replace("</tbody>","<tr><td>" + getPrintDate().replace(/ .*-/,"") + "</td><td>Enhanced Offer for Customer</td><td>89% efficacy</td><td>Result Pending</td></tr></tbody>");
-		t.innerHTML=currentTable.replace("</tbody>","<tr><td>" + getPrintDate().replace(/ .*-/,"") + "</td><td>Enhanced Offer for Related Customer</td><td>50% efficacy</td><td>Result Pending</td></tr></tbody>");
-	*/
+		var childButton;
+		for (var i=0; i <  button.parentNode.childNodes.length ; i++) {
+			button.parentNode.childNodes[i].disabled="true";
+		}
+		alert(message);
+		button.style.background="green";
+		var recommendationCount=document.getElementById("recommendationBadge").innerHTML;
+		if (recommendationCount - 1 > 0) {
+			document.getElementById("recommendationBadge").innerHTML=document.getElementById("recommendationBadge").innerHTML - 1;
+		} else {
+			document.getElementById("recommendationBadge").outerHTML="";
+		}
 	}
-/*
-function rejectAction(recommendation) {
-		if (recommendation == "recommendation1") {
-		var e=document.getElementById("accept1");
-		e.style.display="none";
-		var e=document.getElementById("reject1");
-		e.style.background="red";
-		$("#reject1 span").text('Rejected!');
-		e.disabled="true";
-	} else if ( recommendation == "recommendation2" ) {
-		var e=document.getElementById("accept2");
-		e.style.display="none";
-		var e=document.getElementById("reject2");
-		e.style.background="red";
-		$("#reject2 span").text('Rejected!');
-		e.disabled="true";
-	} else if ( recommendation == "recommendation3" ) {
-		var e=document.getElementById("accept3");
-		e.style.display="none";
-		var e=document.getElementById("reject3");
-		e.style.background="red";
-		$("#reject3 span").text('Rejected!');
-		e.disabled="true";
-	}
-}
 
-function historyAction(recommendation) {
-	if (recommendation == "recommendation1") {	
-		$("#history1").dialog("open");
-	} else if ( recommendation == "recommendation2" ) {
-		$("#history2").dialog("open");
-	} else if ( recommendation == "recommendation3" ) {
-		$("#history3").dialog("open");
+	function rejectAction(button) {
+		var childButton;
+		for (var i=0; i <  button.parentNode.childNodes.length ; i++) {
+			button.parentNode.childNodes[i].disabled="true";
+		}
+		button.style.background="red";
+		var recommendationCount=document.getElementById("recommendationBadge").innerHTML;
+		if (recommendationCount - 1 > 0) {
+			document.getElementById("recommendationBadge").innerHTML=document.getElementById("recommendationBadge").innerHTML - 1;
+		} else {
+			document.getElementById("recommendationBadge").outerHTML="";
+		}
 	}
-}*/
+
+	function historyAction(history) {
+		var e=document.getElementById("recommendationModalBody");
+		e.innerHTML=history;
+		/*
+			t.innerHTML=currentTable.replace("</tbody>","<tr><td>" + getPrintDate().replace(/ .*-/,"") + "</td><td>10% Discount Offer</td><td>87% efficacy</td><td>Result Pending</td></tr></tbody>");
+			t.innerHTML=currentTable.replace("</tbody>","<tr><td>" + getPrintDate().replace(/ .*-/,"") + "</td><td>Enhanced Offer for Customer</td><td>89% efficacy</td><td>Result Pending</td></tr></tbody>");
+			t.innerHTML=currentTable.replace("</tbody>","<tr><td>" + getPrintDate().replace(/ .*-/,"") + "</td><td>Enhanced Offer for Related Customer</td><td>50% efficacy</td><td>Result Pending</td></tr></tbody>");
+		*/
+	}
 	</script>
 	<script>
 		var campaign1=41173;
@@ -429,6 +542,23 @@ function historyAction(recommendation) {
 			</div>
 			<div class="recommendations row col-lg-12 text-center" id="recommendations">
 				<h2>Recommendations</h2>
+				<div class="modal fade" id="recommendationModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+					  <div class="modal-dialog">
+						<div class="modal-content">
+						  <div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+							<h4 class="modal-title" id="recommendationLabel">History</h4>
+						  </div>
+						  <div class="modal-body" id="recommendationModalBody">
+						  Hi there
+						  </div>
+						  <div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+							<button type="button" class="btn btn-primary">Save changes</button>
+						  </div>
+						</div>
+					  </div>
+				</div>
 			</div>
 			<script>
 				updateRecommendations();
