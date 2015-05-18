@@ -148,34 +148,32 @@
 				"</div>"
 			}
 			];
-			var insights=d3.selectAll(".insights").selectAll("ul").selectAll("li")
-				.data(insightData, function (d) {return d.insightText;});
-			insights.enter()
-				.append("li")
-					.attr("role", "presentation")
-					.style("text-align","left")
-					.attr("class",function(d,i) {if (i ==0) { loadInsightDetail(d.insightData);return "active";} else {return "";}})
-					.on("click",function(d) {  insights.attr("class",""); d3.select(this).attr("class","active");})
-					.append("a")
-						.on("click",function (d,i) { loadInsightDetail(d.insightData); });
-			insights.exit().remove();
-			insights
-				.selectAll("a")
-				.text(function (d,i) {return d.insightText;});		
-			document.getElementById("insightBadge").innerHTML=insightData.length;
-		}
-		
-		function highlight(object) {
-			object.class="active";
-		}
-		
-		function unhighlight(object) {
-			object.class="";
-		}
-		function loadInsightDetail(data) {
-			var insightDiv=document.getElementById("insightDetail");
-			insightDiv.innerHTML=data;
-		}
+
+		var insights=d3.select("#insights").selectAll("div")
+				.data(insightData);
+				
+		insights.enter()
+				.append("div")
+				.attr("class", function (d,i) { if (i == 0) { return "insight panel panel-primary  col-lg-offset-1 col-lg-4";} else { return "insight panel panel-primary  col-lg-4 col-lg-offset-1";}})
+				.each(function(d,i) {
+					d3.select(this).append("div").attr("class", "panel-heading pointer-div")
+						.attr("data-toggle","collapse")
+						.attr("data-target","#insightDetail" + i)
+						.append("div")
+							.text(d.insightText);
+					d3.select(this).append("div")
+						.attr("class","panel-body");
+					d3.select(this).select(".panel-body")
+						.append("div")
+							.attr("id","insightDetail" + i)
+							.text("Detailed Info for insight " + i + ".")
+							.attr("class","collapse")
+							.html(d.insightData);
+					});
+					
+		insights.exit().remove();
+		document.getElementById("insightBadge").innerHTML=insightData.length;
+	}
 	</script>
 	<script>
 	function updateRecommendations() {
@@ -192,7 +190,8 @@
 							"<li>Customer XYZ has 5 Facebook friends that are also customers.</li>"+
 							"<li>10% discount is predicted to have 87% efficacy rate due to Customer XYZ's influence.</li>"+
 						"</ul>"+
-					"</div>" },
+					"</div>" ,
+			"recommendationAccept" : "Accepted. 10% discount rates sent."},
 			{"recommendationText" : "Customer ABC is predicted to be considering leaving. Contact Customer ABC and offer free upgrade to Enhanced Package.",
 			"recommendationData" : "<h4>Customer ABC</h4>"+
 						"<table class='table'>"+
@@ -205,7 +204,8 @@
 								"<li>Customer ABC has 'pinned' 3 competitive products on Pintrest in the last month.</li>"+
 								"<li>Enhanced Package Offer rate is predicted to increase customer satisfaction ranking by 35%.</li>"+
 							"</ul>"+
-						"</div>"},
+						"</div>",
+			"recommendationAccept" : "Accepted. Upgrade package offer sent to Customer ABC."},
 			{"recommendationText" : "Target Customer ABC is predicted to be considering leaving. Contact Customer ABC's Facebook circle and offer free upgrade to Enhanced Package.",
 			"recommendationData" : "<h4>Customer ABC</h4>"+
 						"<table class='table'>"+
@@ -218,7 +218,8 @@
 								"<li>Customer ABC has 'pinned' 3 competitive products on Pintrest in the last month.</li>"+
 								"<li>Enhanced Package Offer has 50% predicted chance to increase customer satisfaction ranking by 35%.</li>"+
 							"</ul>"+
-						"</div>"}
+						"</div>",
+			"recommendationAccept" : "Accepted. Upgrade packages offers sent."}
 		];
 		var recommendations=d3.select("#recommendations").selectAll("div")
 				.data(recommendationData);
@@ -227,8 +228,7 @@
 				.append("div")
 				.attr("class", function (d,i) { if (i == 0) { return "recommendation panel panel-primary  col-lg-offset-1 col-lg-4";} else { return "recommendation panel panel-primary  col-lg-4 col-lg-offset-1";}})
 				.each(function(d,i) {
-					d3.select(this).append("div")
-						.attr("class", "panel-heading")
+					d3.select(this).append("div").attr("class", "panel-heading pointer-div")
 						.attr("data-toggle","collapse")
 						.attr("data-target","#recommendationDetail" + i)
 						.append("div")
@@ -244,9 +244,10 @@
 					d3.select(this).select(".panel-body")
 						.append("div")
 						.attr("id","button-recommendation" + i)
-						.each(function (d) {
+						.each(function (d,i) {
 							d3.select(this).append("button")
-								.attr("class","button btn btn-default")
+								.attr("class","button btn btn-default ")
+								.on("click",function (d){acceptAction(d.recommendationAccept,this);})
 								.text(" Accept")
 								.insert("span")
 								.attr("class","glyphicon glyphicon-ok");
@@ -267,6 +268,51 @@
 	
 		document.getElementById("recommendationBadge").innerHTML=recommendationData.length;
 	}
+	
+	function acceptAction(message,button) {
+	alert(message);
+	button.style.background="green"; 
+	/*
+		t.innerHTML=currentTable.replace("</tbody>","<tr><td>" + getPrintDate().replace(/ .*-/,"") + "</td><td>10% Discount Offer</td><td>87% efficacy</td><td>Result Pending</td></tr></tbody>");
+		t.innerHTML=currentTable.replace("</tbody>","<tr><td>" + getPrintDate().replace(/ .*-/,"") + "</td><td>Enhanced Offer for Customer</td><td>89% efficacy</td><td>Result Pending</td></tr></tbody>");
+		t.innerHTML=currentTable.replace("</tbody>","<tr><td>" + getPrintDate().replace(/ .*-/,"") + "</td><td>Enhanced Offer for Related Customer</td><td>50% efficacy</td><td>Result Pending</td></tr></tbody>");
+	*/
+	}
+/*
+function rejectAction(recommendation) {
+		if (recommendation == "recommendation1") {
+		var e=document.getElementById("accept1");
+		e.style.display="none";
+		var e=document.getElementById("reject1");
+		e.style.background="red";
+		$("#reject1 span").text('Rejected!');
+		e.disabled="true";
+	} else if ( recommendation == "recommendation2" ) {
+		var e=document.getElementById("accept2");
+		e.style.display="none";
+		var e=document.getElementById("reject2");
+		e.style.background="red";
+		$("#reject2 span").text('Rejected!');
+		e.disabled="true";
+	} else if ( recommendation == "recommendation3" ) {
+		var e=document.getElementById("accept3");
+		e.style.display="none";
+		var e=document.getElementById("reject3");
+		e.style.background="red";
+		$("#reject3 span").text('Rejected!');
+		e.disabled="true";
+	}
+}
+
+function historyAction(recommendation) {
+	if (recommendation == "recommendation1") {	
+		$("#history1").dialog("open");
+	} else if ( recommendation == "recommendation2" ) {
+		$("#history2").dialog("open");
+	} else if ( recommendation == "recommendation3" ) {
+		$("#history3").dialog("open");
+	}
+}*/
 	</script>
 	<script>
 		var campaign1=41173;
@@ -373,9 +419,6 @@
 			
 			<div class="insights row text-center col-lg-12" id="insights">
 				<h2>Insights</h2>
-				<ul class="nav nav-pills nav-stacked col-xs-3">
-				</ul>
-				<div class="insightDetail col-xs-9" id="insightDetail"></div>
 			</div>
 			<script>
 				updateInsights();

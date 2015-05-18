@@ -182,11 +182,15 @@ hr {
 	border-color : #337ab7;*/
 }
 
-.recommendation {
+.insight,  .recommendation {
 padding-left : 0px;
 padding-right : 0px;
 }
 
 th {
 	text-align : center
+}
+
+.pointer-div {
+	cursor : pointer;
 }
