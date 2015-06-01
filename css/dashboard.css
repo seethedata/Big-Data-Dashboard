@@ -139,6 +139,7 @@ div#campaigns {
 
 .kpi {
 	margin-bottom : 2%;
+	cursor : pointer;
 }
 .progress-bar {
 	margin-bottom : 5%;
