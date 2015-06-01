@@ -26,39 +26,103 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 	<script>
+		var avgSaleSizes=[];
+		var activeWebsiteUsers=[];
+		var unitsProduced=[];
+		var countHighInfluencers=[];
+		var avgCSAT=[];
+		var twitterFollowers=[];
+		var nps=[];
+		var customerCalls=[];
+		var avgCustomerCallLength=[];
+		var kpiArrays={"Average Sale Size" : avgSaleSizes,
+							"Active Website Users" : activeWebsiteUsers,
+							"Units Produced" : unitsProduced,
+							"# of High Influencers" : countHighInfluencers,
+							"Average CSAT Score" : avgCSAT,
+							"Twitter Followers" : twitterFollowers,
+							"Net Promoter Score" : nps,
+							"Customer Calls / hour" : customerCalls,
+							"Cust. Service - Avg. Resolution Time" : avgCustomerCallLength};
+		
 		function getAvgSaleSize() {
 			/*return getRandomNumber(250 ,100).toLocaleString('en-US',{style : "currency",  currency : "USD", currencyDisplay : "symbol"});*/
-			return "$" + Math.round(getRandomNumber(250 ,100)) +".00";
+			var val=Math.round(getRandomNumber(250 ,100));
+			if (avgSaleSizes.length > 9 ){
+				avgSaleSizes.shift();
+			}
+			avgSaleSizes.push(val);
+			return "$" + val + ".00";
 		}
 
-		function getActiveCustomerCount() {
-			return  Math.round(getRandomNumber(2000 ,1000));
+		function getActiveCustomerCount() { 
+			var val=Math.round(getRandomNumber(2000 ,1000));
+			if (activeWebsiteUsers.length > 9 ){
+				activeWebsiteUsers.shift();
+			}
+			activeWebsiteUsers.push(val);
+			return val;
 		}
 
 		function getUnitsProduced() {
-			return Math.round(getRandomNumber(82,10));
+			var val=Math.round(getRandomNumber(82,10));
+			if (unitsProduced.length > 9 ){
+				unitsProduced.shift();
+			}
+			unitsProduced.push(val);
+			return val;
 		}
 
 		function getCountHighInfluencers() {
-			return Math.round(getRandomNumber(10,1));
+			var val=Math.round(getRandomNumber(10,1));
+			if (countHighInfluencers.length > 9 ){
+				countHighInfluencers.shift();
+			}
+			countHighInfluencers.push(val);
+			return val;
 		}
 		function getAvgCSAT() {
-			return getRandomNumber(90.2, 1).toPrecision(4);
+			var val=getRandomNumber(90.2, 1).toPrecision(4);
+			if (avgCSAT.length > 9 ){
+				avgCSAT.shift();
+			}
+			avgCSAT.push(val);
+			return val;
 		}
 		function getTwitterFollowers() {
-			return Math.round(getRandomNumber(485, 1));
+			var val=Math.round(getRandomNumber(485, 1));
+			if (twitterFollowers.length > 9 ){
+				twitterFollowers.shift();
+			}
+			twitterFollowers.push(val);
+			return val;
 		}
 		
 		function getNPS () {
-			return getRandomNumber(97, 1).toPrecision(3);
+			var val=getRandomNumber(97, 1).toPrecision(3);
+			if (nps.length > 9 ){
+				nps.shift();
+			}
+			nps.push(val);
+			return val;
 		}
 		
 		function getCustomerCalls() {
-			return getRandomNumber(12, 1).toPrecision(3);
+			var val=getRandomNumber(12, 1).toPrecision(3);
+			if (customerCalls.length > 9 ){
+				customerCalls.shift();
+			}
+			customerCalls.push(val);
+			return val;
 		}
 		
 		function getAvgCustomerCallLength() {
-			return getRandomNumber(23, 1).toPrecision(3) + " min";
+			var val=getRandomNumber(23, 1).toPrecision(3) ;
+			if (avgCustomerCallLength.length > 9 ){
+				avgCustomerCallLength.shift();
+			}
+			avgCustomerCallLength.push(val);
+			return val + " min";
 		}
 		
 		function getRandomNumber(base, multiplier) {
@@ -77,10 +141,13 @@
 							["Customer Calls / hour",getCustomerCalls()],
 							["Cust. Service - Avg. Resolution Time",getAvgCustomerCallLength()]
 						];
-			var kpis=d3.select(".kpis").selectAll("div").data(kpiData);
+			var kpis=d3.select(".kpis").selectAll(".kpi").data(kpiData);
 			kpis.exit().remove();
 			kpis.enter()
 				.append("div")
+					.on("click",function(d) {showKpiDetail(d[0]);})
+					.attr("data-toggle","modal")
+					.attr("data-target","#kpiModal")
 				.append("h4");
 			kpis.append("p")
 				.attr("class","hideMe");
@@ -97,6 +164,56 @@
 				.attr("id",function (d,i) {return "kpi" + i + "-label"});
 		}
 		
+		function showKpiDetail(kpi) {
+		$("#visualization").empty();
+		var vis = d3.select('#visualization');
+		vis
+			.attr("width",960)
+			.attr("height",500)
+			.append("g")
+				.attr("fill", "none")
+				.attr("stroke","black")
+				.attr("stroke-width","3")
+				.append("line")
+					.attr("x1",0)
+					.attr("y1",500)
+					.attr("x2",500)
+					.attr("y2",500);
+		vis
+			.append("g")
+				.attr("fill", "none")
+				.attr("stroke","black")
+				.attr("stroke-width","3")
+				.append("line")
+					.attr("x1",0)
+					.attr("y1",0)
+					.attr("x2",0)
+					.attr("y2",500);
+		var graphData=[];
+		for (var i=0; i < kpiArrays[kpi].length; i++) {
+					graphData.push({"x" : i, "y" : kpiArrays[kpi][i]});
+		}
+		var pathData=d3.svg.line().x(function (d) {return d.x * 50;}).y(function (d) {return 500-d.y;}).interpolate("linear");
+		vis	
+			.append("g")
+				.append("path")
+					.attr("fill","none")
+					.attr("stroke", "blue")
+					.attr("stroke-width", 2)
+					.attr("d",pathData(graphData));
+					
+		/*var e=document.getElementById("kpiBody");
+			var displayData="<table class='table table-bordered'>" +
+					"<thead><tr><th>" + kpi + "</th></thead>" +
+					"<tbody>";
+			for (var i=0; i < kpiArrays[kpi].length; i++) {
+				displayData=displayData + "<tr><td>" + "$" + kpiArrays[kpi][i] + ".00" + "</td></tr>";
+			}
+			displayData=displayData + 
+					"</tbody>" +
+					"</table> ";
+			e.innerHTML=e.innerHTML + "<p/>" + displayData;*/
+		}
 		function updateInsights() {
 			var insightData=[
 			{"insightText" : "Customer XYZ has increased spending 350%, which has placed them at the top of the \"most valued customer\" list.",
@@ -519,6 +636,22 @@
 	<div class="container-fluid">
 			<div class="kpis row  text-center col-lg-12" id="kpis">
 				<h2>Key Performance Indicators</h2>
+				<div class="modal fade" id="kpiModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+					  <div class="modal-dialog">
+						<div class="modal-content">
+						  <div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+							<h4 class="modal-title" id="kpiLabel">KPI</h4>
+						  </div>
+						  <div class="modal-body" id="kpiBody">
+						  <svg id="visualization" width="1000" height="500"></svg>
+						  </div>
+						  <div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+						  </div>
+						</div>
+					  </div>
+				</div>
 			</div>
 			<script>
 				updateKPIs();
@@ -550,7 +683,6 @@
 							<h4 class="modal-title" id="recommendationLabel">History</h4>
 						  </div>
 						  <div class="modal-body" id="recommendationModalBody">
-						  Hi there
 						  </div>
 						  <div class="modal-footer">
 							<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
