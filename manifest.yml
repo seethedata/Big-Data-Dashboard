@@ -1,6 +1,6 @@
 # Dashboard Manifest
 applications:
-- name: dashboard
+- name: BigDataDashboard
 memory: 512MB
 host: bd-dashboard
 buildpack:  php_buildpack
