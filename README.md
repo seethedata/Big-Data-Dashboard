@@ -1,1 +1,1 @@
-This is a readme.
+The Big Data Dashboard is designed to highlight the ways that Big Data can help to put more valuable, business-focused insights into the hands of key decision makers. 
