@@ -2,5 +2,6 @@
 applications:
 - name: BigDataDashboard
 memory: 512MB
+disk_quota: 80MB
 host: bd-dashboard
 buildpack:  php_buildpack

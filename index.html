@@ -165,54 +165,85 @@
 		}
 		
 		function showKpiDetail(kpi) {
-		$("#visualization").empty();
-		var vis = d3.select('#visualization');
-		vis
-			.attr("width",960)
-			.attr("height",500)
-			.append("g")
+			var max_val=Math.max.apply(Math,kpiArrays[kpi])*1.1;
+			var min_val=Math.min.apply(Math,kpiArrays[kpi]);
+			var graph_x_max=960;
+			var graph_y_max=500;
+			var graph_y_unit=graph_y_max / kpiArrays[kpi].length;
+			$("#kpiLabel").text(kpi);
+			$("#visualization").empty();
+			var vis = d3.select('#visualization');
+			vis
+				.attr("width",graph_x_max)
+				.attr("height",graph_y_max)
+				.append("g")
+					.attr("fill", "none")
+					.attr("stroke","black")
+					.attr("stroke-width","3")
+					.append("line")
+						.attr("x1",0)
+						.attr("y1",graph_y_max)
+						.attr("x2",graph_y_max)
+						.attr("y2",graph_y_max);
+			vis
+				.append("g")
+					.attr("fill", "none")
+					.attr("stroke","black")
+					.attr("stroke-width","3")
+					.append("line")
+						.attr("x1",0)
+						.attr("y1",0)
+						.attr("x2",0)
+						.attr("y2",graph_x_max);
+			vis
+				.append("text")
+					.attr("x",10)
+					.attr("y",10)
+					.text(Math.round(max_val));
+			vis
+				.append("text")
+					.attr("x",10)
+					.attr("y",graph_y_max -10)
+					.text(0);
+			vis
+				.append("text")
+					.attr("x",10)
+					.attr("y",graph_y_max / 2)
+					.text(Math.round(max_val /2));
+			vis
+				.append("g")
 				.attr("fill", "none")
-				.attr("stroke","black")
-				.attr("stroke-width","3")
-				.append("line")
-					.attr("x1",0)
-					.attr("y1",500)
-					.attr("x2",500)
-					.attr("y2",500);
-		vis
-			.append("g")
+					.attr("stroke","black")
+					.attr("stroke-width","3")
+					.append("line")
+						.attr("x1",-10)
+						.attr("y1",0)
+						.attr("x2",10)
+						.attr("y2",0);
+				vis
+				.append("g")
 				.attr("fill", "none")
-				.attr("stroke","black")
-				.attr("stroke-width","3")
-				.append("line")
-					.attr("x1",0)
-					.attr("y1",0)
-					.attr("x2",0)
-					.attr("y2",500);
-		var graphData=[];
-		for (var i=0; i < kpiArrays[kpi].length; i++) {
-					graphData.push({"x" : i, "y" : kpiArrays[kpi][i]});
-		}
-		var pathData=d3.svg.line().x(function (d) {return d.x * 50;}).y(function (d) {return 500-d.y;}).interpolate("linear");
-		vis	
-			.append("g")
-				.append("path")
-					.attr("fill","none")
-					.attr("stroke", "blue")
-					.attr("stroke-width", 2)
-					.attr("d",pathData(graphData));
-					
-		/*var e=document.getElementById("kpiBody");
-			var displayData="<table class='table table-bordered'>" +
-					"<thead><tr><th>" + kpi + "</th></thead>" +
-					"<tbody>";
+					.attr("stroke","black")
+					.attr("stroke-width","3")
+					.append("line")
+						.attr("x1",-10)
+						.attr("y1",graph_y_max / 2)
+						.attr("x2",10)
+						.attr("y2",graph_y_max / 2);
+			var graphData=[];
 			for (var i=0; i < kpiArrays[kpi].length; i++) {
-				displayData=displayData + "<tr><td>" + "$" + kpiArrays[kpi][i] + ".00" + "</td></tr>";
+						graph_val=500*kpiArrays[kpi][i]/max_val;
+						graphData.push({"x" : i, "y" : graph_val});
 			}
-			displayData=displayData + 
-					"</tbody>" +
-					"</table> ";
-			e.innerHTML=e.innerHTML + "<p/>" + displayData;*/
+
+			var pathData=d3.svg.line().x(function (d) {return d.x * 50;}).y(function (d) {return 500-d.y;}).interpolate("linear");
+			vis	
+				.append("g")
+					.append("path")
+						.attr("fill","none")
+						.attr("stroke", "blue")
+						.attr("stroke-width", 2)
+						.attr("d",pathData(graphData));
 		}
 		function updateInsights() {
 			var insightData=[
@@ -641,7 +672,7 @@
 						<div class="modal-content">
 						  <div class="modal-header">
 							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-							<h4 class="modal-title" id="kpiLabel">KPI</h4>
+							<h4 class="modal-title" id="kpiLabel"></h4>
 						  </div>
 						  <div class="modal-body" id="kpiBody">
 						  <svg id="visualization" width="1000" height="500"></svg>
