@@ -15,7 +15,7 @@
     
 	<!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
-
+<script src="https://use.fontawesome.com/1369bc9598.js"></script>
     <!-- Custom styles for this template -->
     <link href="css/dashboard.css" rel="stylesheet">
 
@@ -307,8 +307,8 @@
 						.attr("data-toggle","collapse")
 						.attr("data-target","#insightDetail" + i);
 					d3.select(this).select(".panel-heading")
-						.append("span")
-							.attr("class","glyphicon glyphicon-triangle-right");
+						.append("i")
+							.attr("class","fas fa-angle-down");
 					d3.select(this).select(".panel-heading")
 						.append("span")
 								.text(d.insightText);
