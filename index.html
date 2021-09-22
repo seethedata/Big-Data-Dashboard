@@ -309,7 +309,7 @@
 						.attr("data-target","#insightDetail" + i);
 					d3.select(this).select(".panel-heading")
 						.append("i")
-							.attr("class","fa fa-chevron-down");
+							.attr("class","fa fa-chevron-down fa-3x");
 					d3.select(this).select(".panel-heading")
 						.append("span")
 								.text(d.insightText);
@@ -690,7 +690,7 @@
 			</script>
 
 			<div class="row col-lg-12 viewTarget text-center" id="insightTarget">			
-				<i class="fa fa-chevron-down" onClick="$.scrollTo('#insightTarget',800);"></i>
+				<i class="fa fa-chevron-down fa-3x" onClick="$.scrollTo('#insightTarget',800);"></i>
 				<hr/>
 			</div>
 			
@@ -701,7 +701,7 @@
 				updateInsights();
 			</script>
 			<div class="row col-lg-12 viewTarget text-center" id="recommendationTarget">
-				<i class="fa fa-chevron-down" onClick="$.scrollTo('#recommendationTarget',800);"></i>
+				<i class="fa fa-chevron-down fa-3x" onClick="$.scrollTo('#recommendationTarget',800);"></i>
 				<hr/>
 			</div>
 			<div class="recommendations row col-lg-12 text-center" id="recommendations">
