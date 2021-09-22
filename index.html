@@ -308,7 +308,7 @@
 						.attr("data-target","#insightDetail" + i);
 					d3.select(this).select(".panel-heading")
 						.append("i")
-							.attr("class","fas fa-chevron-down");
+							.attr("class","fa fa-chevron-down");
 					d3.select(this).select(".panel-heading")
 						.append("span")
 								.text(d.insightText);
@@ -491,7 +491,7 @@
 						.attr("data-toggle","collapse")
 						.attr("data-target","#recommendationDetail" + i)
 						.append("i")
-							.attr("class","fas fa-caret-right");
+							.attr("class","fa fa-caret-right");
 					d3.select(this).select(".panel-heading")
 						.append("span")
 							.text(d.recommendationText);
@@ -653,10 +653,10 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
-            <li><a onClick="$.scrollTo('#top',800);"><i class="fas fa-tachometer-alt"></i> Key Performance Indicators</a></li>
-            <li><a onClick="$.scrollTo('#insightTarget',800);"><i class="fas fa-info-circle"></i> Insights<span class="badge nav-badge" id="insightBadge"></span></a></li>
-            <li><a onClick="$.scrollTo('#recommendationTarget',800);"><i class="fas fa-check-circle"></i> Recommendations<span class="badge nav-badge" id="recommendationBadge"></span></a></li>
-            <li><a onClick="$.scrollTo('#campaignTarget',800);"><i class="fas fa-globe"></i> Campaigns</a></li>
+            <li><a onClick="$.scrollTo('#top',800);"><i class="fa fa-tachometer-alt"></i> Key Performance Indicators</a></li>
+            <li><a onClick="$.scrollTo('#insightTarget',800);"><i class="fa fa-info-circle"></i> Insights<span class="badge nav-badge" id="insightBadge"></span></a></li>
+            <li><a onClick="$.scrollTo('#recommendationTarget',800);"><i class="fa fa-check-circle"></i> Recommendations<span class="badge nav-badge" id="recommendationBadge"></span></a></li>
+            <li><a onClick="$.scrollTo('#campaignTarget',800);"><i class="fa fa-globe"></i> Campaigns</a></li>
 			
           </ul>
         </div>
@@ -689,7 +689,7 @@
 			</script>
 
 			<div class="row col-lg-12 viewTarget text-center" id="insightTarget">			
-				<i class="fas fa-chevron-down" onClick="$.scrollTo('#insightTarget',800);"></i>
+				<i class="fa fa-chevron-down" onClick="$.scrollTo('#insightTarget',800);"></i>
 				<hr/>
 			</div>
 			
@@ -700,7 +700,7 @@
 				updateInsights();
 			</script>
 			<div class="row col-lg-12 viewTarget text-center" id="recommendationTarget">
-				<i class="fas fa-chevron-down" onClick="$.scrollTo('#recommendationTarget',800);"></i>
+				<i class="fa fa-chevron-down" onClick="$.scrollTo('#recommendationTarget',800);"></i>
 				<hr/>
 			</div>
 			<div class="recommendations row col-lg-12 text-center" id="recommendations">
@@ -725,7 +725,7 @@
 				updateRecommendations();
 			</script>
 			<div class="row col-lg-12 viewTarget text-center" id="campaignTarget">
-				<i class="fas fa-chevron-down" onClick="$.scrollTo('#campaignTarget',800);"></i>
+				<i class="fa fa-chevron-down" onClick="$.scrollTo('#campaignTarget',800);"></i>
 				<hr/>
 			</div>
 			<div class="campaigns row col-lg-12 text-center" id="campaigns">
@@ -736,7 +736,7 @@
 				window.setInterval(function() {updateCampaigns()},3000);
 			</script>
 			<div class="row col-lg-12 viewTarget text-center" id="bottom">
-				<i class="fas fa-chevron-down" onClick="$.scrollTo('#top',800);"></i>
+				<i class="fa fa-chevron-down" onClick="$.scrollTo('#top',800);"></i>
 			</div>
 
 	</div>
