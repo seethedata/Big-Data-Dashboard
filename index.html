@@ -513,13 +513,13 @@
 								.on("click",function (d){acceptAction(d.recommendationAccept,this);})
 								.text(" Accept")
 								.insert("i")
-								.attr("class","far fa-check-circle");
+								.attr("class","fa fa-check-circle");
 							d3.select(this).insert("button")
 								.attr("class","button btn btn-default")
 								.on("click",function (d){rejectAction(this);})
 								.text(" Reject")
 								.append("i")
-									.attr("class","far fa-times-circle");
+									.attr("class","fa fa-times-circle");
 							d3.select(this).insert("button")
 								.attr("class","button btn btn-default")
 								.attr("data-toggle","modal")
@@ -527,7 +527,7 @@
 								.on("click",function (d){historyAction(d.recommendationHistory);})
 								.text(" History")
 								.append("i")
-									.attr("class","far fa-list-alt");
+									.attr("class","fa fa-list-alt");
 							});
 					});
 					
